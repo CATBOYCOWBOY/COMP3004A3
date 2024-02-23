@@ -221,7 +221,8 @@ DIST          = ../../../Qt/6.6.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/6.6.2/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt/6.6.2/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/6.6.2/gcc_64/mkspecs/features/lex.prf \
-		../ElevatorApplication/ElevatorApplication.pro ../ElevatorApplication/elevator.h \
+		../ElevatorApplication/ElevatorApplication.pro ../ElevatorApplication/constants.h \
+		../ElevatorApplication/elevator.h \
 		../ElevatorApplication/elevatorcontroller.h \
 		../ElevatorApplication/mainelevatorwindow.h ../ElevatorApplication/elevator.cpp \
 		../ElevatorApplication/elevatorcontroller.cpp \
@@ -574,7 +575,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/6.6.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../ElevatorApplication/elevator.h ../ElevatorApplication/elevatorcontroller.h ../ElevatorApplication/mainelevatorwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ElevatorApplication/constants.h ../ElevatorApplication/elevator.h ../ElevatorApplication/elevatorcontroller.h ../ElevatorApplication/mainelevatorwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../ElevatorApplication/elevator.cpp ../ElevatorApplication/elevatorcontroller.cpp ../ElevatorApplication/main.cpp ../ElevatorApplication/mainelevatorwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ElevatorApplication/mainelevatorwindow.ui $(DISTDIR)/
 
@@ -991,6 +992,9 @@ moc_mainelevatorwindow.cpp: ../ElevatorApplication/mainelevatorwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
+		../ElevatorApplication/elevatorcontroller.h \
+		../ElevatorApplication/elevator.h \
 		moc_predefs.h \
 		../../../Qt/6.6.2/gcc_64/libexec/moc
 	/home/p155badger/Qt/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /home/p155badger/code/COMP3004A3/build-ElevatorApplication-Desktop-Debug/moc_predefs.h -I/home/p155badger/Qt/6.6.2/gcc_64/mkspecs/linux-g++ -I/home/p155badger/code/COMP3004A3/ElevatorApplication -I/home/p155badger/Qt/6.6.2/gcc_64/include -I/home/p155badger/Qt/6.6.2/gcc_64/include/QtWidgets -I/home/p155badger/Qt/6.6.2/gcc_64/include/QtGui -I/home/p155badger/Qt/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../ElevatorApplication/mainelevatorwindow.h -o moc_mainelevatorwindow.cpp
@@ -1392,6 +1396,9 @@ main.o: ../ElevatorApplication/main.cpp ../ElevatorApplication/mainelevatorwindo
 		../../../Qt/6.6.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
+		../ElevatorApplication/elevatorcontroller.h \
+		../ElevatorApplication/elevator.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1580,8 +1587,12 @@ mainelevatorwindow.o: ../ElevatorApplication/mainelevatorwindow.cpp ../ElevatorA
 		../../../Qt/6.6.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
+		../ElevatorApplication/elevatorcontroller.h \
+		../ElevatorApplication/elevator.h \
 		ui_mainelevatorwindow.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QVariant \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/QAction \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1604,15 +1615,38 @@ mainelevatorwindow.o: ../ElevatorApplication/mainelevatorwindow.cpp ../ElevatorA
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qinputmethod.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qlocale.h \
 		../../../Qt/6.6.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QComboBox \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt/6.6.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/qpicture.h \
+		../../../Qt/6.6.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QMenu \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmenu.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QMenuBar \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmenubar.h \
-		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qmenu.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QTabWidget \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../../Qt/6.6.2/gcc_64/include/QtWidgets/QWidget \
-		../ElevatorApplication/elevatorcontroller.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
-		../ElevatorApplication/elevator.h
+		../ElevatorApplication/constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainelevatorwindow.o ../ElevatorApplication/mainelevatorwindow.cpp
 
 moc_elevator.o: moc_elevator.cpp 
