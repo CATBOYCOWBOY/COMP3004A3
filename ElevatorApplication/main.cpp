@@ -1,6 +1,10 @@
 #include "mainelevatorwindow.h"
 
 #include <QApplication>
+#include <elevatorcontroller.h>
+
+//initialize singleton to null
+ElevatorController* ElevatorController::instance = nullptr;
 
 int main(int argc, char *argv[])
 {

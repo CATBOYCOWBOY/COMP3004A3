@@ -13,7 +13,87 @@
   <property name="windowTitle">
    <string>MainElevatorWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="primaryTabs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>9</y>
+      <width>781</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="Elevator_Controls">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Select Elevator</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="ElevatorComboBox">
+         <item>
+          <property name="text">
+           <string>Elevator 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Elevator 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Elevator 3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Floor_Controls">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="Building_Controls">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -23,6 +103,12 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuREI_Elevator_controls">
+    <property name="title">
+     <string>REI Elevator </string>
+    </property>
+   </widget>
+   <addaction name="menuREI_Elevator_controls"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
