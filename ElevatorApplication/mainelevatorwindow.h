@@ -13,18 +13,22 @@ QT_END_NAMESPACE
 
 class MainElevatorWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MainElevatorWindow(QWidget *parent = nullptr);
-    ~MainElevatorWindow();
+  MainElevatorWindow(QWidget *parent = nullptr);
+  ~MainElevatorWindow();
 
 private slots:
-    void on_ElevatorComboBox_currentIndexChanged(int index);
+  void onElevatorIndexChange(int index);
+  void onFloorIndexChange(int index);
 
 private:
-    Ui::MainElevatorWindow *ui;
-    ElevatorController* controller = nullptr;
+  void connectSlots();
+  Ui::MainElevatorWindow *ui;
+  ElevatorController* controller = nullptr;
 
+  int selectedElevatorIndex;
+  int selectedFloorIndex;
 };
 #endif // MAINELEVATORWINDOW_H

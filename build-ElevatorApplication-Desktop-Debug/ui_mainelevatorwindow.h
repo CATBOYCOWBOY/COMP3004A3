@@ -39,6 +39,7 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QComboBox *ElevatorComboBox;
+    QLabel *ElevatorSelectLabel;
     QPushButton *ElevatorOpen;
     QPushButton *ElevatorClose;
     QPushButton *ElevatorHelp;
@@ -71,6 +72,7 @@ public:
     QVBoxLayout *verticalLayout_4;
     QLabel *label_4;
     QComboBox *FloorComboBox;
+    QLabel *FloorSelectLabel;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
     QWidget *Building_Controls;
@@ -120,6 +122,11 @@ public:
         ElevatorComboBox->setObjectName("ElevatorComboBox");
 
         verticalLayout->addWidget(ElevatorComboBox);
+
+        ElevatorSelectLabel = new QLabel(verticalLayoutWidget);
+        ElevatorSelectLabel->setObjectName("ElevatorSelectLabel");
+
+        verticalLayout->addWidget(ElevatorSelectLabel);
 
         ElevatorOpen = new QPushButton(Elevator_Controls);
         ElevatorOpen->setObjectName("ElevatorOpen");
@@ -250,12 +257,17 @@ public:
 
         verticalLayout_4->addWidget(FloorComboBox);
 
+        FloorSelectLabel = new QLabel(verticalLayoutWidget_4);
+        FloorSelectLabel->setObjectName("FloorSelectLabel");
+
+        verticalLayout_4->addWidget(FloorSelectLabel);
+
         pushButton_2 = new QPushButton(Floor_Controls);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(340, 170, 89, 25));
+        pushButton_2->setGeometry(QRect(340, 230, 89, 25));
         pushButton_3 = new QPushButton(Floor_Controls);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(340, 260, 89, 25));
+        pushButton_3->setGeometry(QRect(340, 320, 89, 25));
         primaryTabs->addTab(Floor_Controls, QString());
         Building_Controls = new QWidget();
         Building_Controls->setObjectName("Building_Controls");
@@ -327,6 +339,7 @@ public:
         ElevatorComboBox->setItemText(1, QCoreApplication::translate("MainElevatorWindow", "Elevator 2", nullptr));
         ElevatorComboBox->setItemText(2, QCoreApplication::translate("MainElevatorWindow", "Elevator 3", nullptr));
 
+        ElevatorSelectLabel->setText(QCoreApplication::translate("MainElevatorWindow", "Elevator 1 Controls", nullptr));
         ElevatorOpen->setText(QCoreApplication::translate("MainElevatorWindow", "Open", nullptr));
         ElevatorClose->setText(QCoreApplication::translate("MainElevatorWindow", "Close", nullptr));
         ElevatorHelp->setText(QCoreApplication::translate("MainElevatorWindow", "Help", nullptr));
@@ -352,6 +365,7 @@ public:
         FloorComboBox->setItemText(5, QCoreApplication::translate("MainElevatorWindow", "6", nullptr));
         FloorComboBox->setItemText(6, QCoreApplication::translate("MainElevatorWindow", "7", nullptr));
 
+        FloorSelectLabel->setText(QCoreApplication::translate("MainElevatorWindow", "Floor 1 Controls", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainElevatorWindow", "UP", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainElevatorWindow", "DOWN", nullptr));
         primaryTabs->setTabText(primaryTabs->indexOf(Floor_Controls), QCoreApplication::translate("MainElevatorWindow", "Tab 2", nullptr));

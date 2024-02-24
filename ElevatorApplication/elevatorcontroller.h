@@ -7,19 +7,19 @@
 
 class ElevatorController : public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    static ElevatorController* getInstance(QObject* parent = nullptr, int numFloors = 0, int numElevators = 0);
-    static void destroyInstance();
-    ElevatorController(ElevatorController*) = delete;
+  static ElevatorController* getInstance(QObject* parent = nullptr);
+  static void destroyInstance();
+  ElevatorController(ElevatorController*) = delete;
 
 protected:
-    explicit ElevatorController(QObject *parent = nullptr, int numFloors = 0, int numElevators = 0);
-    ~ElevatorController();
-    static ElevatorController* instance;
+  explicit ElevatorController(QObject *parent = nullptr);
+  ~ElevatorController();
+  static ElevatorController* instance;
 
 private:
-    Elevator* elevators;
+  Elevator** elevators;
 
 signals:
 };
