@@ -15,6 +15,8 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
   selectedFloorIndex = 0;
 
   controller = ElevatorController::getInstance(this);
+
+  connectSlots();
 }
 
 MainElevatorWindow::~MainElevatorWindow()
@@ -26,12 +28,12 @@ MainElevatorWindow::~MainElevatorWindow()
 void MainElevatorWindow::connectSlots()
 {
   connect(ui->ElevatorComboBox,
-      &QComboBox::currentIndexChanged,
+      qOverload<int>(&QComboBox::currentIndexChanged),
       this,
       &MainElevatorWindow::onElevatorIndexChange);
 
   connect(ui->FloorComboBox,
-      &QComboBox::currentIndexChanged,
+      qOverload<int>(&QComboBox::currentIndexChanged),
       this,
       &MainElevatorWindow::onFloorIndexChange);
 }

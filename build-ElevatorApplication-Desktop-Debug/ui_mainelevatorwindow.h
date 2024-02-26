@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainelevatorwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.6.2
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,7 @@
 #define UI_MAINELEVATORWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
@@ -92,26 +92,26 @@ public:
     void setupUi(QMainWindow *MainElevatorWindow)
     {
         if (MainElevatorWindow->objectName().isEmpty())
-            MainElevatorWindow->setObjectName("MainElevatorWindow");
+            MainElevatorWindow->setObjectName(QString::fromUtf8("MainElevatorWindow"));
         MainElevatorWindow->resize(800, 600);
         centralwidget = new QWidget(MainElevatorWindow);
-        centralwidget->setObjectName("centralwidget");
+        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         primaryTabs = new QTabWidget(centralwidget);
-        primaryTabs->setObjectName("primaryTabs");
+        primaryTabs->setObjectName(QString::fromUtf8("primaryTabs"));
         primaryTabs->setGeometry(QRect(10, 9, 781, 551));
         Elevator_Controls = new QWidget();
-        Elevator_Controls->setObjectName("Elevator_Controls");
+        Elevator_Controls->setObjectName(QString::fromUtf8("Elevator_Controls"));
         label = new QLabel(Elevator_Controls);
-        label->setObjectName("label");
+        label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(30, 20, 67, 17));
         verticalLayoutWidget = new QWidget(Elevator_Controls);
-        verticalLayoutWidget->setObjectName("verticalLayoutWidget");
+        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(20, 20, 160, 80));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         label_2 = new QLabel(verticalLayoutWidget);
-        label_2->setObjectName("label_2");
+        label_2->setObjectName(QString::fromUtf8("label_2"));
 
         verticalLayout->addWidget(label_2);
 
@@ -119,129 +119,129 @@ public:
         ElevatorComboBox->addItem(QString());
         ElevatorComboBox->addItem(QString());
         ElevatorComboBox->addItem(QString());
-        ElevatorComboBox->setObjectName("ElevatorComboBox");
+        ElevatorComboBox->setObjectName(QString::fromUtf8("ElevatorComboBox"));
 
         verticalLayout->addWidget(ElevatorComboBox);
 
         ElevatorSelectLabel = new QLabel(verticalLayoutWidget);
-        ElevatorSelectLabel->setObjectName("ElevatorSelectLabel");
+        ElevatorSelectLabel->setObjectName(QString::fromUtf8("ElevatorSelectLabel"));
 
         verticalLayout->addWidget(ElevatorSelectLabel);
 
         ElevatorOpen = new QPushButton(Elevator_Controls);
-        ElevatorOpen->setObjectName("ElevatorOpen");
+        ElevatorOpen->setObjectName(QString::fromUtf8("ElevatorOpen"));
         ElevatorOpen->setGeometry(QRect(250, 150, 89, 25));
         ElevatorClose = new QPushButton(Elevator_Controls);
-        ElevatorClose->setObjectName("ElevatorClose");
+        ElevatorClose->setObjectName(QString::fromUtf8("ElevatorClose"));
         ElevatorClose->setGeometry(QRect(250, 190, 89, 25));
         ElevatorHelp = new QPushButton(Elevator_Controls);
-        ElevatorHelp->setObjectName("ElevatorHelp");
+        ElevatorHelp->setObjectName(QString::fromUtf8("ElevatorHelp"));
         ElevatorHelp->setGeometry(QRect(250, 280, 89, 25));
         ElevatorFire = new QPushButton(Elevator_Controls);
-        ElevatorFire->setObjectName("ElevatorFire");
+        ElevatorFire->setObjectName(QString::fromUtf8("ElevatorFire"));
         ElevatorFire->setGeometry(QRect(250, 340, 89, 25));
         pushButton = new QPushButton(Elevator_Controls);
-        pushButton->setObjectName("pushButton");
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(250, 420, 89, 25));
         verticalLayoutWidget_2 = new QWidget(Elevator_Controls);
-        verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
+        verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
         verticalLayoutWidget_2->setGeometry(QRect(20, 150, 160, 249));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
-        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         ElevatorOne = new QPushButton(verticalLayoutWidget_2);
-        ElevatorOne->setObjectName("ElevatorOne");
+        ElevatorOne->setObjectName(QString::fromUtf8("ElevatorOne"));
 
         verticalLayout_2->addWidget(ElevatorOne);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer);
 
         ElevatorTwo = new QPushButton(verticalLayoutWidget_2);
-        ElevatorTwo->setObjectName("ElevatorTwo");
+        ElevatorTwo->setObjectName(QString::fromUtf8("ElevatorTwo"));
 
         verticalLayout_2->addWidget(ElevatorTwo);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer_2);
 
         ElevatorThree = new QPushButton(verticalLayoutWidget_2);
-        ElevatorThree->setObjectName("ElevatorThree");
+        ElevatorThree->setObjectName(QString::fromUtf8("ElevatorThree"));
 
         verticalLayout_2->addWidget(ElevatorThree);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer_3);
 
         ElevatorFour = new QPushButton(verticalLayoutWidget_2);
-        ElevatorFour->setObjectName("ElevatorFour");
+        ElevatorFour->setObjectName(QString::fromUtf8("ElevatorFour"));
 
         verticalLayout_2->addWidget(ElevatorFour);
 
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer_4);
 
         ElevatorFive = new QPushButton(verticalLayoutWidget_2);
-        ElevatorFive->setObjectName("ElevatorFive");
+        ElevatorFive->setObjectName(QString::fromUtf8("ElevatorFive"));
 
         verticalLayout_2->addWidget(ElevatorFive);
 
-        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer_5);
 
         ElevatorSix = new QPushButton(verticalLayoutWidget_2);
-        ElevatorSix->setObjectName("ElevatorSix");
+        ElevatorSix->setObjectName(QString::fromUtf8("ElevatorSix"));
 
         verticalLayout_2->addWidget(ElevatorSix);
 
-        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer_6);
 
         ElevatorSeven = new QPushButton(verticalLayoutWidget_2);
-        ElevatorSeven->setObjectName("ElevatorSeven");
+        ElevatorSeven->setObjectName(QString::fromUtf8("ElevatorSeven"));
 
         verticalLayout_2->addWidget(ElevatorSeven);
 
         ElevatorFrame = new QFrame(Elevator_Controls);
-        ElevatorFrame->setObjectName("ElevatorFrame");
+        ElevatorFrame->setObjectName(QString::fromUtf8("ElevatorFrame"));
         ElevatorFrame->setGeometry(QRect(440, 150, 231, 171));
         ElevatorFrame->setFrameShape(QFrame::StyledPanel);
         ElevatorFrame->setFrameShadow(QFrame::Raised);
         ElevatorFloorDisplay = new QLCDNumber(ElevatorFrame);
-        ElevatorFloorDisplay->setObjectName("ElevatorFloorDisplay");
+        ElevatorFloorDisplay->setObjectName(QString::fromUtf8("ElevatorFloorDisplay"));
         ElevatorFloorDisplay->setGeometry(QRect(20, 60, 64, 23));
         label_3 = new QLabel(ElevatorFrame);
-        label_3->setObjectName("label_3");
+        label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(20, 30, 131, 20));
         verticalLayoutWidget_3 = new QWidget(ElevatorFrame);
-        verticalLayoutWidget_3->setObjectName("verticalLayoutWidget_3");
+        verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
         verticalLayoutWidget_3->setGeometry(QRect(10, 20, 160, 80));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget_3);
-        verticalLayout_3->setObjectName("verticalLayout_3");
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         ElevatorMessageBox = new QLabel(ElevatorFrame);
-        ElevatorMessageBox->setObjectName("ElevatorMessageBox");
+        ElevatorMessageBox->setObjectName(QString::fromUtf8("ElevatorMessageBox"));
         ElevatorMessageBox->setGeometry(QRect(10, 120, 201, 17));
         label_6 = new QLabel(Elevator_Controls);
-        label_6->setObjectName("label_6");
+        label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(250, 400, 111, 17));
         primaryTabs->addTab(Elevator_Controls, QString());
         Floor_Controls = new QWidget();
-        Floor_Controls->setObjectName("Floor_Controls");
+        Floor_Controls->setObjectName(QString::fromUtf8("Floor_Controls"));
         verticalLayoutWidget_4 = new QWidget(Floor_Controls);
-        verticalLayoutWidget_4->setObjectName("verticalLayoutWidget_4");
+        verticalLayoutWidget_4->setObjectName(QString::fromUtf8("verticalLayoutWidget_4"));
         verticalLayoutWidget_4->setGeometry(QRect(310, 50, 160, 80));
         verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_4);
-        verticalLayout_4->setObjectName("verticalLayout_4");
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(verticalLayoutWidget_4);
-        label_4->setObjectName("label_4");
+        label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout_4->addWidget(label_4);
 
@@ -253,71 +253,71 @@ public:
         FloorComboBox->addItem(QString());
         FloorComboBox->addItem(QString());
         FloorComboBox->addItem(QString());
-        FloorComboBox->setObjectName("FloorComboBox");
+        FloorComboBox->setObjectName(QString::fromUtf8("FloorComboBox"));
 
         verticalLayout_4->addWidget(FloorComboBox);
 
         FloorSelectLabel = new QLabel(verticalLayoutWidget_4);
-        FloorSelectLabel->setObjectName("FloorSelectLabel");
+        FloorSelectLabel->setObjectName(QString::fromUtf8("FloorSelectLabel"));
 
         verticalLayout_4->addWidget(FloorSelectLabel);
 
         pushButton_2 = new QPushButton(Floor_Controls);
-        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(340, 230, 89, 25));
         pushButton_3 = new QPushButton(Floor_Controls);
-        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
         pushButton_3->setGeometry(QRect(340, 320, 89, 25));
         primaryTabs->addTab(Floor_Controls, QString());
         Building_Controls = new QWidget();
-        Building_Controls->setObjectName("Building_Controls");
+        Building_Controls->setObjectName(QString::fromUtf8("Building_Controls"));
         verticalLayoutWidget_5 = new QWidget(Building_Controls);
-        verticalLayoutWidget_5->setObjectName("verticalLayoutWidget_5");
+        verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
         verticalLayoutWidget_5->setGeometry(QRect(290, 140, 176, 105));
         verticalLayout_5 = new QVBoxLayout(verticalLayoutWidget_5);
-        verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
         label_5 = new QLabel(verticalLayoutWidget_5);
-        label_5->setObjectName("label_5");
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
         verticalLayout_5->addWidget(label_5);
 
-        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_7 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_5->addItem(verticalSpacer_7);
 
-        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_5->addItem(verticalSpacer_8);
 
         pushButton_4 = new QPushButton(verticalLayoutWidget_5);
-        pushButton_4->setObjectName("pushButton_4");
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
 
         verticalLayout_5->addWidget(pushButton_4);
 
-        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_5->addItem(verticalSpacer_9);
 
-        verticalSpacer_10 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        verticalSpacer_10 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_5->addItem(verticalSpacer_10);
 
         pushButton_5 = new QPushButton(verticalLayoutWidget_5);
-        pushButton_5->setObjectName("pushButton_5");
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
 
         verticalLayout_5->addWidget(pushButton_5);
 
         primaryTabs->addTab(Building_Controls, QString());
         MainElevatorWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainElevatorWindow);
-        menubar->setObjectName("menubar");
+        menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 22));
         menuREI_Elevator_controls = new QMenu(menubar);
-        menuREI_Elevator_controls->setObjectName("menuREI_Elevator_controls");
+        menuREI_Elevator_controls->setObjectName(QString::fromUtf8("menuREI_Elevator_controls"));
         MainElevatorWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainElevatorWindow);
-        statusbar->setObjectName("statusbar");
+        statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainElevatorWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuREI_Elevator_controls->menuAction());
