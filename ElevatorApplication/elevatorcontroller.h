@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QThread>
+#include <QThreadPool>
+#include <QRunnable>
+#include <QDebug>
 #include "elevator.h"
 
 class ElevatorController : public QObject
@@ -20,6 +24,7 @@ protected:
 
 private:
   Elevator** elevators;
+  QThread** threads;
 
 signals:
 };

@@ -67,6 +67,8 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *ElevatorMessageBox;
     QLabel *label_6;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_7;
     QWidget *Floor_Controls;
     QWidget *verticalLayoutWidget_4;
     QVBoxLayout *verticalLayout_4;
@@ -142,7 +144,7 @@ public:
         ElevatorFire->setGeometry(QRect(250, 340, 89, 25));
         pushButton = new QPushButton(Elevator_Controls);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(250, 420, 89, 25));
+        pushButton->setGeometry(QRect(250, 410, 89, 25));
         verticalLayoutWidget_2 = new QWidget(Elevator_Controls);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
         verticalLayoutWidget_2->setGeometry(QRect(20, 150, 160, 249));
@@ -230,7 +232,13 @@ public:
         ElevatorMessageBox->setGeometry(QRect(10, 120, 201, 17));
         label_6 = new QLabel(Elevator_Controls);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(250, 400, 111, 17));
+        label_6->setGeometry(QRect(250, 390, 111, 17));
+        pushButton_6 = new QPushButton(Elevator_Controls);
+        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
+        pushButton_6->setGeometry(QRect(250, 440, 111, 41));
+        pushButton_7 = new QPushButton(Elevator_Controls);
+        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
+        pushButton_7->setGeometry(QRect(250, 490, 83, 25));
         primaryTabs->addTab(Elevator_Controls, QString());
         Floor_Controls = new QWidget();
         Floor_Controls->setObjectName(QString::fromUtf8("Floor_Controls"));
@@ -355,6 +363,8 @@ public:
         label_3->setText(QCoreApplication::translate("MainElevatorWindow", "Current Floor", nullptr));
         ElevatorMessageBox->setText(QString());
         label_6->setText(QCoreApplication::translate("MainElevatorWindow", "TESTING ONLY", nullptr));
+        pushButton_6->setText(QCoreApplication::translate("MainElevatorWindow", "Overload", nullptr));
+        pushButton_7->setText(QCoreApplication::translate("MainElevatorWindow", "Reset", nullptr));
         primaryTabs->setTabText(primaryTabs->indexOf(Elevator_Controls), QCoreApplication::translate("MainElevatorWindow", "Tab 1", nullptr));
         label_4->setText(QCoreApplication::translate("MainElevatorWindow", "Select Floor", nullptr));
         FloorComboBox->setItemText(0, QCoreApplication::translate("MainElevatorWindow", "1", nullptr));

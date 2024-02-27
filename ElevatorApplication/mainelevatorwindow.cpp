@@ -16,17 +16,6 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
 
   controller = ElevatorController::getInstance(this);
 
-  connectSlots();
-}
-
-MainElevatorWindow::~MainElevatorWindow()
-{
-  delete ui;
-  ElevatorController::destroyInstance();
-}
-
-void MainElevatorWindow::connectSlots()
-{
   connect(ui->ElevatorComboBox,
       qOverload<int>(&QComboBox::currentIndexChanged),
       this,
@@ -38,6 +27,11 @@ void MainElevatorWindow::connectSlots()
       &MainElevatorWindow::onFloorIndexChange);
 }
 
+MainElevatorWindow::~MainElevatorWindow()
+{
+  delete ui;
+  ElevatorController::destroyInstance();
+}
 
 void MainElevatorWindow::onElevatorIndexChange(int index)
 {

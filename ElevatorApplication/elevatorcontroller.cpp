@@ -5,8 +5,19 @@ ElevatorController::ElevatorController(QObject *parent)
   : QObject{parent}
 {
   elevators = new Elevator *[NUM_ELEVATORS];
+  threads = new QThread *[NUM_ELEVATORS];
   for (int i = 0; i < NUM_ELEVATORS; i++) {
-      elevators[i] = new Elevator();
+      Elevator* elevator = new Elevator(nullptr, i + 1);
+      QThread* thread = new QThread();
+      connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
+      connect(elevator, &Elevator::onShutoff, thread, &QThread::quit);
+      connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
+
+      elevators[i] = elevator;
+      threads[i] = thread;
+
+      elevator->moveToThread(thread);
+      thread->start();
   }
 }
 

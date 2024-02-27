@@ -1,66 +1,48 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'elevatorcontroller.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.6.2)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../ElevatorApplication/elevatorcontroller.h"
-#include <QtCore/qmetatype.h>
-
-#if __has_include(<QtCore/qtmochelpers.h>)
-#include <QtCore/qtmochelpers.h>
-#else
-QT_BEGIN_MOC_NAMESPACE
-#endif
-
-
 #include <memory>
-
+#include "../ElevatorApplication/elevatorcontroller.h"
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'elevatorcontroller.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.6.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.15.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
-#ifndef Q_CONSTINIT
-#define Q_CONSTINIT
-#endif
-
+QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-QT_WARNING_DISABLE_GCC("-Wuseless-cast")
-namespace {
-
-#ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSElevatorControllerENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSElevatorControllerENDCLASS = QtMocHelpers::stringData(
-    "ElevatorController"
-);
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSElevatorControllerENDCLASS_t {
-    uint offsetsAndSizes[2];
+struct qt_meta_stringdata_ElevatorController_t {
+    QByteArrayData data[1];
     char stringdata0[19];
 };
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSElevatorControllerENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSElevatorControllerENDCLASS_t qt_meta_stringdata_CLASSElevatorControllerENDCLASS = {
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_ElevatorController_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_ElevatorController_t qt_meta_stringdata_ElevatorController = {
     {
-        QT_MOC_LITERAL(0, 18)   // "ElevatorController"
+QT_MOC_LITERAL(0, 0, 18) // "ElevatorController"
+
     },
     "ElevatorController"
 };
 #undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSElevatorControllerENDCLASS[] = {
+static const uint qt_meta_data_ElevatorController[] = {
 
  // content:
-      12,       // revision
+       8,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -73,19 +55,6 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSElevatorControllerENDCLASS[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject ElevatorController::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_CLASSElevatorControllerENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSElevatorControllerENDCLASS,
-    qt_static_metacall,
-    nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSElevatorControllerENDCLASS_t,
-        // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<ElevatorController, std::true_type>
-    >,
-    nullptr
-} };
-
 void ElevatorController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     (void)_o;
@@ -93,6 +62,16 @@ void ElevatorController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
     (void)_c;
     (void)_a;
 }
+
+QT_INIT_METAOBJECT const QMetaObject ElevatorController::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_ElevatorController.data,
+    qt_meta_data_ElevatorController,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
 
 const QMetaObject *ElevatorController::metaObject() const
 {
@@ -102,7 +81,7 @@ const QMetaObject *ElevatorController::metaObject() const
 void *ElevatorController::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSElevatorControllerENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ElevatorController.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
@@ -113,3 +92,4 @@ int ElevatorController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 QT_WARNING_POP
+QT_END_MOC_NAMESPACE
