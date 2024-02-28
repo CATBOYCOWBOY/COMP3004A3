@@ -1,20 +1,23 @@
 #include "elevator.h"
 #include "constants.h"
 
-Elevator::Elevator(QObject *parent, int num)
-    : QObject{parent}, number(num)
-{
-  floorQueue = new bool[NUM_FLOORS];
-  isDoorBlocked = false;
-  isOverloaded = false;
-  systemIsRunning = true;
+Elevator::Elevator(QObject *parent, QMutex *m, int elevatorNumber, bool *queue)
+    : QObject{parent}
+    , floorQueue(queue)
+    , number(elevatorNumber)
+    , mutex(m)
+{}
 
-  currentFloor = 1;
+int Elevator::getCurrentFloor()
+{
+  return currentFloor;
 }
 
-Elevator::~Elevator()
+void Elevator::addFloorToQueue(int floor)
 {
-  delete[] floorQueue;
+  mutex->lock();
+  floorQueue[floor] = true;
+  mutex->unlock();
 }
 
 void Elevator::eventLoop() {
@@ -44,6 +47,7 @@ bool Elevator::moveToNextFloor()
   int next = nextFloor();
   if (next > 0)
   {
+    qDebug() << "Moving to floor " << next;
     currentFloor = next;
     emit floorChanged(next);
     return true;

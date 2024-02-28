@@ -19,6 +19,9 @@ public:
   MainElevatorWindow(QWidget *parent = nullptr);
   ~MainElevatorWindow();
 
+signals:
+  int changeElevatorIndex(int);
+
 private slots:
   void onElevatorIndexChange(int index);
   void onFloorIndexChange(int index);
@@ -28,7 +31,6 @@ private:
   Ui::MainElevatorWindow *ui;
   ElevatorController* controller = nullptr;
 
-  int selectedElevatorIndex;
   int selectedFloorIndex;
 };
 #endif // MAINELEVATORWINDOW_H

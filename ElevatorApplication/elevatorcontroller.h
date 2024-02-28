@@ -7,6 +7,7 @@
 #include <QThreadPool>
 #include <QRunnable>
 #include <QDebug>
+#include <QMutex>
 #include "elevator.h"
 
 class ElevatorController : public QObject
@@ -17,6 +18,13 @@ public:
   static void destroyInstance();
   ElevatorController(ElevatorController*) = delete;
 
+  int getElevatorPosition(int);
+
+public slots:
+  void onFloorRequest(int);
+  void onViewSelectElevator(int);
+  void onElevatorControlsAction(int);
+
 protected:
   explicit ElevatorController(QObject *parent = nullptr);
   ~ElevatorController();
@@ -25,6 +33,12 @@ protected:
 private:
   Elevator** elevators;
   QThread** threads;
+  QMutex* mutex;
+
+  int viewSelectedElevator;
+
+  // shared resource between controller and elevators
+  bool** queues;
 
 signals:
 };

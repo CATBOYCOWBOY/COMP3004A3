@@ -11,7 +11,6 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
   ui->primaryTabs->setTabText(1, "Floor Controls");
   ui->primaryTabs->setTabText(2, "Building Controls");
 
-  selectedElevatorIndex = 0;
   selectedFloorIndex = 0;
 
   controller = ElevatorController::getInstance(this);
@@ -25,6 +24,11 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
       qOverload<int>(&QComboBox::currentIndexChanged),
       this,
       &MainElevatorWindow::onFloorIndexChange);
+
+  connect(this,
+          qOverload<int>(&MainElevatorWindow::changeElevatorIndex),
+          controller,
+          &ElevatorController::onViewSelectElevator);
 }
 
 MainElevatorWindow::~MainElevatorWindow()
@@ -36,9 +40,9 @@ MainElevatorWindow::~MainElevatorWindow()
 void MainElevatorWindow::onElevatorIndexChange(int index)
 {
   std::stringstream stream;
-  selectedElevatorIndex = index;
   stream << "Elevator " << index + 1 << " Controls";
   ui->ElevatorSelectLabel->setText(QString::fromStdString(stream.str()));
+  emit changeElevatorIndex(index);
 }
 
 void MainElevatorWindow::onFloorIndexChange(int index)
