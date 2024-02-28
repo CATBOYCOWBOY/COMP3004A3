@@ -25,6 +25,8 @@ public slots:
   void onViewSelectElevator(int);
   void onElevatorControlsAction(int);
 
+  void onResetButton();
+
 protected:
   explicit ElevatorController(QObject *parent = nullptr);
   ~ElevatorController();
@@ -37,10 +39,13 @@ private:
 
   int viewSelectedElevator;
 
+  int activeThreads = 0;
+
   // shared resource between controller and elevators
   bool** queues;
 
 signals:
+  void shutOffElevators();
 };
 
 #endif // ELEVATORCONTROLLER_H

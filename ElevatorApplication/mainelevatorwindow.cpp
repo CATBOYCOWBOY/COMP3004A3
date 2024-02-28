@@ -25,10 +25,18 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
       this,
       &MainElevatorWindow::onFloorIndexChange);
 
+  connect(ui->resetButton, &QPushButton::clicked, this, &MainElevatorWindow::onResetButton);
+
   connect(this,
           qOverload<int>(&MainElevatorWindow::changeElevatorIndex),
           controller,
           &ElevatorController::onViewSelectElevator);
+
+  connect(this,
+          &MainElevatorWindow::resetButtonPressed,
+          controller,
+          &ElevatorController::onResetButton);
+
 }
 
 MainElevatorWindow::~MainElevatorWindow()
@@ -51,5 +59,10 @@ void MainElevatorWindow::onFloorIndexChange(int index)
   selectedFloorIndex = index;
   stream << "Floor " << index + 1 << " Controls";
   ui->FloorSelectLabel->setText(QString::fromStdString(stream.str()));
+}
+
+void MainElevatorWindow::onResetButton()
+{
+  emit resetButtonPressed();
 }
 

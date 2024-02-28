@@ -20,11 +20,14 @@ public:
   ~MainElevatorWindow();
 
 signals:
-  int changeElevatorIndex(int);
+  void changeElevatorIndex(int);
+  void resetButtonPressed();
 
 private slots:
   void onElevatorIndexChange(int index);
   void onFloorIndexChange(int index);
+
+  void onResetButton();
 
 private:
   void connectSlots();

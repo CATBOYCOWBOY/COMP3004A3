@@ -13,16 +13,20 @@ ElevatorController::ElevatorController(QObject *parent)
   for (int i = 0; i < NUM_ELEVATORS; i++) {
     queues[i] = new bool[NUM_FLOORS];
 
+    for (int j = 0; j < NUM_FLOORS; j++) {
+      queues[i][j] = false;
+    }
+
+    qDebug() << "starting " << i + 1;
+
     Elevator* elevator = new Elevator(nullptr, mutex, i + 1, queues[i]);
     QThread* thread = new QThread();
     connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
-    connect(elevator, &Elevator::onShutoff, thread, &QThread::quit);
-    connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
+    connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
 
     elevators[i] = elevator;
     threads[i] = thread;
 
-    elevator->setAutoDelete(true);
     elevator->moveToThread(thread);
     thread->start();
   }
@@ -64,10 +68,22 @@ void ElevatorController::onElevatorControlsAction(int action)
   qDebug() << "Controls action: " << action;
 }
 
-ElevatorController::~ElevatorController()
+void ElevatorController::onResetButton()
 {
   for (int i = 0; i < NUM_ELEVATORS; i++) {
-    threads[i]->exit();
+    elevators[i]->sayHello();
+  }
+}
+
+ElevatorController::~ElevatorController()
+{
+  qDebug() << "Elevatorcontroller dtor";
+  for (int i = 0; i < NUM_ELEVATORS; i++) {
+    elevators[i]->onShutOff();
+    threads[i]->wait();
+  }
+
+  for (int i = 0; i < NUM_ELEVATORS; i++) {
     delete threads[i];
     delete queues[i];
   }

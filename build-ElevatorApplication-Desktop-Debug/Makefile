@@ -714,8 +714,6 @@ moc_elevator.cpp: ../ElevatorApplication/elevator.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qthread.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qelapsedtimer.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/QRunnable \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/qrunnable.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qdebug.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qtextstream.h \
@@ -1172,8 +1170,6 @@ elevator.o: ../ElevatorApplication/elevator.cpp ../ElevatorApplication/elevator.
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qthread.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qelapsedtimer.h \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/QRunnable \
-		../../../Qt/6.6.2/gcc_64/include/QtCore/qrunnable.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/QDebug \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qdebug.h \
 		../../../Qt/6.6.2/gcc_64/include/QtCore/qtextstream.h \

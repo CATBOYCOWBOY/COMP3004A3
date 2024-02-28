@@ -4,38 +4,41 @@
 #include <QObject>
 #include <QString>
 #include <QThread>
-#include <QRunnable>
 #include <QDebug>
 #include <QMutex>
 #include <QMutexLocker>
 
-class Elevator : public QObject, public QRunnable
+class Elevator : public QObject
 {
   Q_OBJECT
 public:
-  explicit Elevator(QObject *parent = nullptr, QMutex* = nullptr, int = -1, bool* = nullptr);
-
-  void shutOff();
+  explicit Elevator(QObject* parent = nullptr, QMutex* = nullptr, int = -1, bool* = nullptr);
+  ~Elevator();
 
   int getCurrentFloor();
 
   void addFloorToQueue(int);
 
+  void sayHello();
+
+  void onShutOff();
+
 signals:
-  int floorChanged(int);
-  bool doorOpened(bool);
-  QString elevatorMessageChanged(std::string);
-  void onShutoff();
+  void floorChanged(int);
+  void doorOpened(bool);
+  void elevatorMessageChanged(std::string);
+  void shutOff();
 
 public slots:
-   void eventLoop();
+  void eventLoop();
+
 
 private:
   bool * floorQueue;
   bool isDoorBlocked = false;
   bool isOverloaded = false;
   bool isThereFire = false;
-  bool systemIsRunning = false;
+  bool systemIsRunning = true;
 
   int currentFloor = 1;
   int number;
@@ -45,10 +48,6 @@ private:
   void onFloorChangeLoop();
 
   QMutex* mutex;
-
-  // QRunnable interface
-public:
-  void run();
 };
 
 #endif // ELEVATOR_H
