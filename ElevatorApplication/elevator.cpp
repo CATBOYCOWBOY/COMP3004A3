@@ -17,6 +17,13 @@ Elevator::~Elevator()
   emit shutOff();
 }
 
+
+////////////////////
+//                //
+//     SLOTS      //
+//                //
+////////////////////
+
 int Elevator::getCurrentFloor()
 {
   return currentFloor;
@@ -43,7 +50,8 @@ void Elevator::onFloorChangeLoop()
 {
   for (int i = 0; i < 10; i++)
   {
-
+    qDebug() << "waited for " << i << " tenths of seconds";
+    QThread::msleep(100);
   }
 }
 
@@ -70,13 +78,3 @@ bool Elevator::moveToNextFloor()
   return false;
 }
 
-void Elevator::onShutOff()
-{
-  qDebug() << "shutoff";
-  systemIsRunning = false;
-}
-
-void Elevator::reset();
-{
-  elevatorMutex->lock();
-}

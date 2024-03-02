@@ -38,6 +38,7 @@ public slots:
   void onElevatorFireButton();
   void onElevatorHelpButton();
   void onElevatorOverButton();
+  void onElevatorBlockButton();
   void onElevatorResetButton();
 
   void onBuildingFireButton();

@@ -13,6 +13,8 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
 
   ui->buildingControlLabel->setText("");
   ui->elevatorFloorDisplay->display(1);
+
+  controller = ElevatorController::getInstance();
 }
 
 MainElevatorWindow::~MainElevatorWindow()
@@ -38,7 +40,7 @@ void MainElevatorWindow::onFloorIndexChange(int index)
   emit floorIndexChange(index);
 }
 
-void MainElevatorWindow::onResetButton()
+void MainElevatorWindow::onBuildingResetButton()
 {
   emit buildingResetButton();
 }

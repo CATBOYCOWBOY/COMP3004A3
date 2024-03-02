@@ -33,7 +33,12 @@ public slots:
   void handleCloseButton();
 
   void handleFire();
-  void handlePowerOut();
+  void handleHelpButton();
+  void handleOverload();
+  void handleBlock();
+
+  void handleOutage();
+  void resolveHelp();
   void reset();
 
 private:
@@ -41,6 +46,7 @@ private:
   bool isDoorBlocked = false;
   bool isOverloaded = false;
   bool isThereFire = false;
+  bool helpButtonPushed = false;
   bool systemIsRunning = true;
 
   int currentFloor = 1;
@@ -48,8 +54,14 @@ private:
 
   bool moveToNextFloor();
   void onFloorChangeLoop();
+  void onHelpLoop();
+  void onFireLoop();
+  void onPowerOutLoop();
 
+  // locks main thread (floorQueue is shared)
   QMutex* mainMutex;
+
+  // locks resources for elevator thread
   QMutex* elevatorMutex;
 };
 

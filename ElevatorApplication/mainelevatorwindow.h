@@ -32,6 +32,7 @@ signals:
   void elevatorFireButton();
   void elevatorHelpButton();
   void elevatorOverButton();
+  void elevatorBlockButton();
   void elevatorResetButton();
 
   void buildingFireButton();
@@ -43,7 +44,22 @@ private slots:
   void onElevatorIndexChange(int index);
   void onFloorIndexChange(int index);
 
-  void onResetButton();
+  void onElevatorPanelRequest(int);
+  void onElevatorOpenRequest(int);
+  void onElevatorCloseRequest();
+
+  void onFloorButtonPushed(int);
+
+  void onElevatorFireButton();
+  void onElevatorHelpButton();
+  void onElevatorOverButton();
+  void onElevatorBlockButton();
+  void onElevatorResetButton();
+
+  void onBuildingFireButton();
+  void onBuildingOutageButton();
+  void onHandleHelpButton();
+  void onBuildingResetButton();
 
 private:
   void connectSlots();

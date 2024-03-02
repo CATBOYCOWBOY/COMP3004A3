@@ -168,6 +168,11 @@ void ElevatorController::onElevatorOverButton()
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " overload button";
 }
 
+void ElevatorController::onElevatorBlockButton()
+{
+  qDebug() << "Elevator " << viewSelectedElevatorIndex << " block button";
+}
+
 void ElevatorController::onElevatorResetButton()
 {
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " reset button";
