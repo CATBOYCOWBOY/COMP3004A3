@@ -20,12 +20,30 @@ public:
 
   int getElevatorPosition(int);
 
-public slots:
-  void onFloorRequest(int);
-  void onViewSelectElevator(int);
-  void onElevatorControlsAction(int);
+signals:
+  void shutOffElevators();
 
-  void onResetButton();
+
+public slots:
+  //SYSTEM CONTROL
+  void onElevatorIndexChange(int);
+  void onFloorIndexChange(int);
+
+  void onElevatorPanelRequest(int);
+  void onElevatorOpenRequest(bool);
+  void onElevatorCloseRequest();
+
+  void onFloorButtonRequest(int);
+
+  void onElevatorFireButton();
+  void onElevatorHelpButton();
+  void onElevatorOverButton();
+  void onElevatorResetButton();
+
+  void onBuildingFireButton();
+  void onBuildingOutageButton();
+  void onHelpButton();
+  void onBuildingResetButton();
 
 protected:
   explicit ElevatorController(QObject *parent = nullptr);
@@ -37,15 +55,16 @@ private:
   QThread** threads;
   QMutex* mutex;
 
-  int viewSelectedElevator;
+  int viewSelectedElevatorIndex;
+  int viewSelectedFloorIndex;
 
-  int activeThreads = 0;
+  int helpRequestedElevatorIndex;
 
   // shared resource between controller and elevators
   bool** queues;
 
-signals:
-  void shutOffElevators();
+  void connectElevatorSlots(Elevator*, QThread*);
+
 };
 
 #endif // ELEVATORCONTROLLER_H

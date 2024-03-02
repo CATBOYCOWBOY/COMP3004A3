@@ -20,8 +20,24 @@ public:
   ~MainElevatorWindow();
 
 signals:
-  void changeElevatorIndex(int);
-  void resetButtonPressed();
+  void elevatorIndexChange(int);
+  void floorIndexChange(int);
+
+  void elevatorPanelRequest(int);
+  void elevatorOpenRequest(int);
+  void elevatorCloseRequest();
+
+  void floorButtonPushed(int);
+
+  void elevatorFireButton();
+  void elevatorHelpButton();
+  void elevatorOverButton();
+  void elevatorResetButton();
+
+  void buildingFireButton();
+  void buildingOutageButton();
+  void handleHelpButton();
+  void buildingResetButton();
 
 private slots:
   void onElevatorIndexChange(int index);

@@ -17,11 +17,6 @@ public:
 
   int getCurrentFloor();
 
-  void addFloorToQueue(int);
-
-  void sayHello();
-
-  void onShutOff();
 
 signals:
   void floorChanged(int);
@@ -31,7 +26,15 @@ signals:
 
 public slots:
   void eventLoop();
+  void onShutOff();
 
+  void addFloorToQueue(int);
+  void handleOpenButton(bool);
+  void handleCloseButton();
+
+  void handleFire();
+  void handlePowerOut();
+  void reset();
 
 private:
   bool * floorQueue;
@@ -43,11 +46,11 @@ private:
   int currentFloor = 1;
   int number;
 
-  int nextFloor();
   bool moveToNextFloor();
   void onFloorChangeLoop();
 
-  QMutex* mutex;
+  QMutex* mainMutex;
+  QMutex* elevatorMutex;
 };
 
 #endif // ELEVATOR_H

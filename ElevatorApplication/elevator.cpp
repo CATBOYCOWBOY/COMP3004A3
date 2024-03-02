@@ -5,9 +5,10 @@ Elevator::Elevator(QObject *parent, QMutex *m, int elevatorNumber, bool *queue)
     : QObject{parent}
     , floorQueue(queue)
     , number(elevatorNumber)
-    , mutex(m)
+    , mainMutex(m)
 {
   qDebug() << "Elevator " << number << " ctr";
+  elevatorMutex = new QMutex();
 }
 
 Elevator::~Elevator()
@@ -23,9 +24,9 @@ int Elevator::getCurrentFloor()
 
 void Elevator::addFloorToQueue(int floor)
 {
-  mutex->lock();
+  mainMutex->lock();
   floorQueue[floor] = true;
-  mutex->unlock();
+  mainMutex->unlock();
 }
 
 void Elevator::eventLoop() {
@@ -48,35 +49,34 @@ void Elevator::onFloorChangeLoop()
 
 bool Elevator::moveToNextFloor()
 {
-  int next = nextFloor();
+  mainMutex->lock();
+  int next = -1;
+  for (int i = 0; i < NUM_FLOORS; i++) {
+    if (floorQueue[i]) {
+      floorQueue[i] = false;
+      next = i + 1;
+    }
+  }
+
   if (next > 0)
   {
     qDebug() << "Moving to floor " << next;
     currentFloor = next;
     emit floorChanged(next);
+    mainMutex->unlock();
     return true;
   }
+  mainMutex->unlock();
   return false;
-}
-
-int Elevator::nextFloor()
-{
-  for (int i = 0; i < NUM_FLOORS; i++) {
-    if (floorQueue[i]) {
-      floorQueue[i] = false;
-      return i + 1;
-    }
-  }
-  return -1;
-}
-
-void Elevator::sayHello()
-{
-  qDebug() << "hello world " << number;
 }
 
 void Elevator::onShutOff()
 {
   qDebug() << "shutoff";
   systemIsRunning = false;
+}
+
+void Elevator::reset();
+{
+  elevatorMutex->lock();
 }
