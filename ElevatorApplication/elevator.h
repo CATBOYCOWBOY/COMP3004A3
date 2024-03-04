@@ -16,8 +16,7 @@ public:
   ~Elevator();
 
   int getCurrentFloor();
-
-
+  void onShutOff();
 signals:
   void floorChanged(int);
   void doorOpened(bool);
@@ -26,7 +25,6 @@ signals:
 
 public slots:
   void eventLoop();
-  void onShutOff();
 
   void addFloorToQueue(int);
   void handleOpenButton(bool);

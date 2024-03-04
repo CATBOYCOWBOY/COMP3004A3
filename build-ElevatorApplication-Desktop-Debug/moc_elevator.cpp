@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Elevator_t {
-    QByteArrayData data[19];
-    char stringdata0[234];
+    QByteArrayData data[18];
+    char stringdata0[224];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,22 +40,21 @@ QT_MOC_LITERAL(4, 34, 22), // "elevatorMessageChanged"
 QT_MOC_LITERAL(5, 57, 11), // "std::string"
 QT_MOC_LITERAL(6, 69, 7), // "shutOff"
 QT_MOC_LITERAL(7, 77, 9), // "eventLoop"
-QT_MOC_LITERAL(8, 87, 9), // "onShutOff"
-QT_MOC_LITERAL(9, 97, 15), // "addFloorToQueue"
-QT_MOC_LITERAL(10, 113, 16), // "handleOpenButton"
-QT_MOC_LITERAL(11, 130, 17), // "handleCloseButton"
-QT_MOC_LITERAL(12, 148, 10), // "handleFire"
-QT_MOC_LITERAL(13, 159, 16), // "handleHelpButton"
-QT_MOC_LITERAL(14, 176, 14), // "handleOverload"
-QT_MOC_LITERAL(15, 191, 11), // "handleBlock"
-QT_MOC_LITERAL(16, 203, 12), // "handleOutage"
-QT_MOC_LITERAL(17, 216, 11), // "resolveHelp"
-QT_MOC_LITERAL(18, 228, 5) // "reset"
+QT_MOC_LITERAL(8, 87, 15), // "addFloorToQueue"
+QT_MOC_LITERAL(9, 103, 16), // "handleOpenButton"
+QT_MOC_LITERAL(10, 120, 17), // "handleCloseButton"
+QT_MOC_LITERAL(11, 138, 10), // "handleFire"
+QT_MOC_LITERAL(12, 149, 16), // "handleHelpButton"
+QT_MOC_LITERAL(13, 166, 14), // "handleOverload"
+QT_MOC_LITERAL(14, 181, 11), // "handleBlock"
+QT_MOC_LITERAL(15, 193, 12), // "handleOutage"
+QT_MOC_LITERAL(16, 206, 11), // "resolveHelp"
+QT_MOC_LITERAL(17, 218, 5) // "reset"
 
     },
     "Elevator\0floorChanged\0\0doorOpened\0"
     "elevatorMessageChanged\0std::string\0"
-    "shutOff\0eventLoop\0onShutOff\0addFloorToQueue\0"
+    "shutOff\0eventLoop\0addFloorToQueue\0"
     "handleOpenButton\0handleCloseButton\0"
     "handleFire\0handleHelpButton\0handleOverload\0"
     "handleBlock\0handleOutage\0resolveHelp\0"
@@ -69,7 +68,7 @@ static const uint qt_meta_data_Elevator[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,24 +76,23 @@ static const uint qt_meta_data_Elevator[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x06 /* Public */,
-       3,    1,   97,    2, 0x06 /* Public */,
-       4,    1,  100,    2, 0x06 /* Public */,
-       6,    0,  103,    2, 0x06 /* Public */,
+       1,    1,   89,    2, 0x06 /* Public */,
+       3,    1,   92,    2, 0x06 /* Public */,
+       4,    1,   95,    2, 0x06 /* Public */,
+       6,    0,   98,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,  104,    2, 0x0a /* Public */,
-       8,    0,  105,    2, 0x0a /* Public */,
-       9,    1,  106,    2, 0x0a /* Public */,
-      10,    1,  109,    2, 0x0a /* Public */,
-      11,    0,  112,    2, 0x0a /* Public */,
-      12,    0,  113,    2, 0x0a /* Public */,
-      13,    0,  114,    2, 0x0a /* Public */,
-      14,    0,  115,    2, 0x0a /* Public */,
-      15,    0,  116,    2, 0x0a /* Public */,
-      16,    0,  117,    2, 0x0a /* Public */,
-      17,    0,  118,    2, 0x0a /* Public */,
-      18,    0,  119,    2, 0x0a /* Public */,
+       7,    0,   99,    2, 0x0a /* Public */,
+       8,    1,  100,    2, 0x0a /* Public */,
+       9,    1,  103,    2, 0x0a /* Public */,
+      10,    0,  106,    2, 0x0a /* Public */,
+      11,    0,  107,    2, 0x0a /* Public */,
+      12,    0,  108,    2, 0x0a /* Public */,
+      13,    0,  109,    2, 0x0a /* Public */,
+      14,    0,  110,    2, 0x0a /* Public */,
+      15,    0,  111,    2, 0x0a /* Public */,
+      16,    0,  112,    2, 0x0a /* Public */,
+      17,    0,  113,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -103,7 +101,6 @@ static const uint qt_meta_data_Elevator[] = {
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void, QMetaType::Bool,    2,
@@ -130,17 +127,16 @@ void Elevator::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 2: _t->elevatorMessageChanged((*reinterpret_cast< std::string(*)>(_a[1]))); break;
         case 3: _t->shutOff(); break;
         case 4: _t->eventLoop(); break;
-        case 5: _t->onShutOff(); break;
-        case 6: _t->addFloorToQueue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: _t->handleOpenButton((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 8: _t->handleCloseButton(); break;
-        case 9: _t->handleFire(); break;
-        case 10: _t->handleHelpButton(); break;
-        case 11: _t->handleOverload(); break;
-        case 12: _t->handleBlock(); break;
-        case 13: _t->handleOutage(); break;
-        case 14: _t->resolveHelp(); break;
-        case 15: _t->reset(); break;
+        case 5: _t->addFloorToQueue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->handleOpenButton((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->handleCloseButton(); break;
+        case 8: _t->handleFire(); break;
+        case 9: _t->handleHelpButton(); break;
+        case 10: _t->handleOverload(); break;
+        case 11: _t->handleBlock(); break;
+        case 12: _t->handleOutage(); break;
+        case 13: _t->resolveHelp(); break;
+        case 14: _t->reset(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -205,13 +201,13 @@ int Elevator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 15;
     }
     return _id;
 }

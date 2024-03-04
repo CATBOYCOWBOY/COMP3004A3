@@ -21,8 +21,7 @@ public:
   int getElevatorPosition(int);
 
 signals:
-  void shutOffElevators();
-
+  void shutOff();
 
 public slots:
   //SYSTEM CONTROL

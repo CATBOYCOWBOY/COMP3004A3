@@ -1,6 +1,8 @@
 #include "elevatorcontroller.h"
 #include "constants.h"
 #include <cmath>
+#include <sstream>
+
 
 // Ctr, dtr, singleton handler methods
 
@@ -16,18 +18,19 @@ ElevatorController::ElevatorController(QObject* parent)
   mutex = new QMutex();
 
   for (int i = 0; i < NUM_ELEVATORS; i++) {
+    std::stringstream s;
     queues[i] = new bool[NUM_FLOORS];
 
     for (int j = 0; j < NUM_FLOORS; j++) {
       queues[i][j] = false;
     }
-
+    s << "thread " << i +1;
     qDebug() << "starting " << i + 1;
 
     Elevator* elevator = new Elevator(nullptr, mutex, i + 1, queues[i]);
     QThread* thread = new QThread();
+    thread->setObjectName(QString::fromStdString(s.str()));
     connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
-    connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
 
     elevators[i] = elevator;
     threads[i] = thread;
