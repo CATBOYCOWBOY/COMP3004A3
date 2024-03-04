@@ -8,7 +8,7 @@ ElevatorController::ElevatorController(QObject* parent)
     : QObject{parent}
     , viewSelectedElevatorIndex(0)
     , viewSelectedFloorIndex(0)
-    , helpRequestedElevatorIndex(0);
+    , helpRequestedElevatorIndex(0)
 {
   elevators = new Elevator *[NUM_ELEVATORS];
   threads = new QThread *[NUM_ELEVATORS];
@@ -128,9 +128,9 @@ void ElevatorController::onElevatorCloseRequest()
   qDebug() << "close";
 }
 
-void ElevatorController::onFloorButtonRequest(int dir)
+void ElevatorController::onFloorButtonRequest()
 {
-  qDebug() << "floor button pushed, direction " << dir;
+  qDebug() << "floor button pushed, floor " << viewSelectedFloorIndex;
   int closestIndex = 0;
   int closestValue = NUM_FLOORS + 1;
 

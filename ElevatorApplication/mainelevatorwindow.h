@@ -1,4 +1,4 @@
-#ifndef MAINELEVATORWINDOW_H
+﻿#ifndef MAINELEVATORWINDOW_H
 #define MAINELEVATORWINDOW_H
 
 #include <QMainWindow>
@@ -24,10 +24,10 @@ signals:
   void floorIndexChange(int);
 
   void elevatorPanelRequest(int);
-  void elevatorOpenRequest(int);
+  void elevatorOpenRequest(bool);
   void elevatorCloseRequest();
 
-  void floorButtonPushed(int);
+  void floorButtonPushed();
 
   void elevatorFireButton();
   void elevatorHelpButton();
@@ -44,25 +44,35 @@ private slots:
   void onElevatorIndexChange(int index);
   void onFloorIndexChange(int index);
 
-  void onElevatorPanelRequest(int);
-  void onElevatorOpenRequest(int);
-  void onElevatorCloseRequest();
+  void on_ElevatorOne_clicked();
+  void on_ElevatorTwo_clicked();
+  void on_ElevatorThree_clicked();
+  void on_ElevatorFour_clicked();
+  void on_ElevatorFive_clicked();
+  void on_ElevatorSix_clicked();
+  void on_ElevatorSeven_clicked();
 
-  void onFloorButtonPushed(int);
 
-  void onElevatorFireButton();
-  void onElevatorHelpButton();
-  void onElevatorOverButton();
-  void onElevatorBlockButton();
-  void onElevatorResetButton();
 
-  void onBuildingFireButton();
-  void onBuildingOutageButton();
-  void onHandleHelpButton();
-  void onBuildingResetButton();
+  void on_ElevatorOpen_pressed();
+  void on_ElevatorOpen_released();
+  void on_ElevatorClose_clicked();
+  void on_ElevatorHelp_clicked();
+  void on_elevatorFireButton_clicked();
+  void on_elevatorBlockButton_clicked();
+  void on_elevatorOverButton_clicked();
+  void on_elevatorResetButton_clicked();
+
+  void on_elevatorUpButton_clicked();
+  void on_pushButton_3_clicked();
+
+  void on_fireButton_clicked();
+  void on_powerOutButton_clicked();
+  void on_handleHelpButton_clicked();
+  void on_resetButton_clicked();
 
 private:
-  void connectSlots();
+  void connectControllerSlots();
   Ui::MainElevatorWindow *ui;
   ElevatorController* controller = nullptr;
 

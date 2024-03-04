@@ -33,7 +33,7 @@ public slots:
   void onElevatorOpenRequest(bool);
   void onElevatorCloseRequest();
 
-  void onFloorButtonRequest(int);
+  void onFloorButtonRequest();
 
   void onElevatorFireButton();
   void onElevatorHelpButton();

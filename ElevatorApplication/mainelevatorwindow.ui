@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Elevator_Controls">
      <attribute name="title">
@@ -140,7 +140,7 @@
        <string>Fire</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="elevatorBlockButton">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -368,7 +368,7 @@
        <string>TESTING ONLY</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="elevatorOverButton">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -381,7 +381,7 @@
        <string>Overload</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="elevatorResetButton">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -464,7 +464,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="elevatorUpButton">
       <property name="geometry">
        <rect>
         <x>340</x>
