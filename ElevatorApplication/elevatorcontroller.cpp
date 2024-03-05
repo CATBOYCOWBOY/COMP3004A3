@@ -153,13 +153,13 @@ void ElevatorController::onElevatorOverButton()
 
 void ElevatorController::onElevatorBlockButton()
 {
-  qDebug() << "Elevator " << viewSelectedElevatorIndex << " block button";
   emit blockButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onElevatorResetButton()
 {
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " reset button";
+  emit elevatorResetButton(viewSelectedElevatorIndex);
 }
 
 // Building slots
@@ -210,7 +210,17 @@ void ElevatorController::connectElevatorSlots(Elevator * elevator, QThread * thr
   connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
   connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
   connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
-  connect(this, &ElevatorController::blockButton, elevator, &Elevator::handleBlock);
+
+  connect(this,
+          &ElevatorController::blockButton,
+          elevator,
+          &Elevator::handleBlock,
+          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::elevatorResetButton,
+          elevator,
+          &Elevator::reset,
+          Qt::DirectConnection);
 
   connect(elevator, &Elevator::floorChanged, this, &ElevatorController::onElevatorFLoorChange);
 }

@@ -33,10 +33,11 @@ bool Elevator::moveToNextFloor()
 
   if (next > 0)
   {
-    qDebug() << "Moving to floor " << next;
+    qInfo() << "Elevator " << number + 1 << " moves to floor " << next + 1;
     currentFloor = next;
     emit floorChanged(next);
     mainMutex->unlock();
+    onFloorChangeLoop();
     return true;
   }
   mainMutex->unlock();
@@ -46,22 +47,35 @@ bool Elevator::moveToNextFloor()
 
 void Elevator::onFloorChangeLoop()
 {
-  for (int i = 0; i < 10; i++) {
+  qInfo() << "Elevator " << number + 1 << " rings bell";
+  qInfo() << "Elevator " << number + 1 << " opens door";
+  for (int i = 0; i < 20; i++) {
     if (!systemIsRunning) {
       break;
     }
-    qDebug() << "waited for " << i << " seconds";
-    QThread::msleep(1000);
+    QThread::msleep(100);
+  }
+  qInfo() << "emergency: " << isThereAnEmergency();
+  while (isThereAnEmergency()) {
+    checkDoors();
+  }
+  qInfo() << "Elevator " << number + 1 << " rings bell";
+  qInfo() << "Elevator " << number + 1 << " close door";
+}
+
+void Elevator::checkDoors()
+{
+  qDebug() << "check doors";
+  if (isDoorBlocked) {
+    return onDoorBlockedLoop();
+  } else if (isOverloaded) {
+    return onOverloadedLoop();
   }
 }
 
 void Elevator::handleEmergency()
 {
-  if (isDoorBlocked) {
-    return onDoorBlockedLoop();
-  } else if (isOverloaded) {
-    return onOverloadedLoop();
-  } else if (isThereFire) {
+  if (isThereFire) {
     return onFireLoop();
   } else if (helpButtonPushed) {
     return onHelpLoop();
@@ -74,15 +88,15 @@ void Elevator::onDoorBlockedLoop()
 {
   // 4 seconds and a bit is chosen very arbitrarily
   for (int i = 0; i < 40; i++) {
-    if (!isDoorBlocked) {
+    if (!isDoorBlocked || !systemIsRunning) {
       return;
     }
     QThread::msleep(100);
   }
-  while (!isDoorBlocked) {
+  while (isDoorBlocked && systemIsRunning) {
     qDebug() << "Elevator " << number + 1 << " door is blocked";
     for (int i = 0; i < 40; i++) {
-      if (!isDoorBlocked) {
+      if (!isDoorBlocked || !systemIsRunning) {
         return;
       }
       QThread::msleep(100);
@@ -100,7 +114,7 @@ void Elevator::onPowerOutLoop() {}
 
 bool Elevator::isThereAnEmergency()
 {
-  return isDoorBlocked || isOverloaded || isThereFire || helpButtonPushed || powerOutage;
+  return (isDoorBlocked || isOverloaded || isThereFire || helpButtonPushed || powerOutage);
 }
 
 ////////////////////
@@ -111,7 +125,6 @@ bool Elevator::isThereAnEmergency()
 
 void Elevator::addFloorToQueue(int floor)
 {
-  qDebug() << "adding floor " << floor << " in thread " << this->thread()->objectName();
   mainMutex->lock();
   floorQueue[floor] = true;
   mainMutex->unlock();
@@ -129,11 +142,9 @@ void Elevator::eventLoop() {
   {
     handleEmergency();
     moveToNextFloor();
-    onFloorChangeLoop();
 
-    QThread::msleep(1000);
+    QThread::msleep(100);
   }
-  qDebug() << "Elevator " << number + 1 << " shutting down";
   this->deleteLater();
 }
 
@@ -171,6 +182,7 @@ void Elevator::handleOverload()
 
 void Elevator::handleBlock(int i)
 {
+  qDebug() << "Door block signal num: " << i;
   if (number != i) {
     return;
   }
@@ -189,16 +201,22 @@ void Elevator::resolveHelp()
 
 }
 
-void Elevator::reset()
+void Elevator::reset(int i)
 {
-  isDoorBlocked = false;
-  isOverloaded = false;
+  if (number == i) {
+    elevatorMutex->lock();
+    isDoorBlocked = false;
+    isOverloaded = false;
+    elevatorMutex->unlock();
+  }
 }
 
 void Elevator::resetEmergency()
 {
-  reset();
+  reset(number);
+  elevatorMutex->lock();
   isThereFire = false;
   helpButtonPushed = false;
   powerOutage = false;
+  elevatorMutex->unlock();
 }

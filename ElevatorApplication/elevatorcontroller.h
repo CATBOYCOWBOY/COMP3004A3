@@ -26,6 +26,7 @@ signals:
   void elevatorFloorChanged();
 
   void blockButton(int);
+  void elevatorResetButton(int);
 
 public slots:
   //SLOTS FROM CONTROLLER

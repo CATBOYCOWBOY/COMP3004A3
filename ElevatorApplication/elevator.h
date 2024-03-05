@@ -37,7 +37,7 @@ public slots:
 
   void handleOutage();
   void resolveHelp();
-  void reset();
+  void reset(int);
   void resetEmergency();
 
 private:
@@ -59,6 +59,8 @@ private:
   void onHelpLoop();
   void onFireLoop();
   void onPowerOutLoop();
+
+  void checkDoors();
   void handleEmergency();
 
   bool isThereAnEmergency();
