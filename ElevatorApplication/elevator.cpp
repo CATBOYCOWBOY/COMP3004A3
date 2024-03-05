@@ -7,13 +7,11 @@ Elevator::Elevator(QObject *parent, QMutex *m, int elevatorNumber, bool *queue)
     , number(elevatorNumber)
     , mainMutex(m)
 {
-  qDebug() << "Elevator " << number << " ctr";
   elevatorMutex = new QMutex();
 }
 
 Elevator::~Elevator()
 {
-  qDebug() << "Elevator " << number << " dtor";
   emit shutOff();
 }
 

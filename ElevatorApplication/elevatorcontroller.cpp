@@ -25,7 +25,6 @@ ElevatorController::ElevatorController(QObject* parent)
       queues[i][j] = false;
     }
     s << "thread " << i +1;
-    qDebug() << "starting " << i + 1;
 
     Elevator* elevator = new Elevator(nullptr, mutex, i + 1, queues[i]);
     QThread* thread = new QThread();
@@ -45,7 +44,6 @@ ElevatorController::ElevatorController(QObject* parent)
 
 ElevatorController::~ElevatorController()
 {
-  qDebug() << "Elevatorcontroller dtor";
   for (int i = 0; i < NUM_ELEVATORS; i++) {
     elevators[i]->onShutOff();
     threads[i]->wait();
