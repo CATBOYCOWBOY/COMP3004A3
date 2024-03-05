@@ -26,7 +26,7 @@ ElevatorController::ElevatorController(QObject* parent)
     }
     s << "thread " << i +1;
 
-    Elevator* elevator = new Elevator(nullptr, mutex, i + 1, queues[i]);
+    Elevator* elevator = new Elevator(nullptr, mutex, i, queues[i]);
     QThread* thread = new QThread();
     thread->setObjectName(QString::fromStdString(s.str()));
 
@@ -104,7 +104,6 @@ void ElevatorController::onFloorIndexChange(int index)
 
 void ElevatorController::onElevatorPanelRequest(int floor)
 {
-  qDebug() << "Elevator " << viewSelectedElevatorIndex << " selected floor " << floor;
   elevators[viewSelectedElevatorIndex]->addFloorToQueue(floor);
 }
 
@@ -155,6 +154,7 @@ void ElevatorController::onElevatorOverButton()
 void ElevatorController::onElevatorBlockButton()
 {
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " block button";
+  emit blockButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onElevatorResetButton()
@@ -210,6 +210,7 @@ void ElevatorController::connectElevatorSlots(Elevator * elevator, QThread * thr
   connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
   connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
   connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
+  connect(this, &ElevatorController::blockButton, elevator, &Elevator::handleBlock);
 
   connect(elevator, &Elevator::floorChanged, this, &ElevatorController::onElevatorFLoorChange);
 }
