@@ -31,6 +31,7 @@ bool Elevator::moveToNextFloor()
     if (floorQueue[i]) {
       floorQueue[i] = false;
       next = i + 1;
+      break;
     }
   }
 
@@ -81,7 +82,7 @@ void Elevator::onFloorChangeLoop()
 
 void Elevator::onShutOff()
 {
-  qDebug() << "onShutoff";
+  qDebug() << "onShutoff " << number;
   systemIsRunning = false;
 }
 

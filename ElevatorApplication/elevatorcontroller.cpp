@@ -31,6 +31,8 @@ ElevatorController::ElevatorController(QObject* parent)
     QThread* thread = new QThread();
     thread->setObjectName(QString::fromStdString(s.str()));
     connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
+    connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
+    connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
 
     elevators[i] = elevator;
     threads[i] = thread;
