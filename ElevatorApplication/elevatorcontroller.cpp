@@ -29,9 +29,8 @@ ElevatorController::ElevatorController(QObject* parent)
     Elevator* elevator = new Elevator(nullptr, mutex, i + 1, queues[i]);
     QThread* thread = new QThread();
     thread->setObjectName(QString::fromStdString(s.str()));
-    connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
-    connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
-    connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
+
+    connectElevatorSlots(elevator, thread);
 
     elevators[i] = elevator;
     threads[i] = thread;
@@ -81,13 +80,7 @@ void ElevatorController::destroyInstance()
 //                //
 ////////////////////
 
-//   _____ ______ _      ______ _____ _______ ____  _____   _____
-//  / ____|  ____| |    |  ____/ ____|__   __/ __ \|  __ \ / ____|
-// | (___ | |__  | |    | |__ | |       | | | |  | | |__) | (___
-//  \___ \|  __| | |    |  __|| |       | | | |  | |  _  / \___ \
-//  ____) | |____| |____| |___| |____   | | | |__| | | \ \ ____) |
-// |_____/|______|______|______\_____|  |_|  \____/|_|";  \_|_____/
-//
+// qComboBox slots
 
 void ElevatorController::onElevatorIndexChange(int index)
 {
@@ -107,13 +100,7 @@ void ElevatorController::onFloorIndexChange(int index)
   qDebug() << "Selected Floor: " << viewSelectedElevatorIndex + 1;
 }
 
-//   _____ ____  _   _ _______ _____   ____  _       _____
-//  / ____/ __ \| \ | |__   __|  __ \ / __ \| |     / ____|
-// | |   | |  | |  \| |  | |  | |__) | |  | | |    | (___
-// | |   | |  | | . ` |  | |  |  _  /| |  | | |     \___ \
-// | |___| |__| | |\  |  | |  | | \ \| |__| | |____ ____) |
-//  \_____\____/|_| \_|  |_|  |_|  \_\\____/|______|_____/
-//
+// controls slots
 
 void ElevatorController::onElevatorPanelRequest(int floor)
 {
@@ -147,13 +134,7 @@ void ElevatorController::onFloorButtonRequest()
   elevators[closestIndex]->addFloorToQueue(viewSelectedFloorIndex);
 }
 
-//  ______ __  __ ______ _____   _____ ______ _   _  _______     __
-// |  ____|  \/  |  ____|  __ \ / ____|  ____| \ | |/ ____\ \   / /
-// | |__  | \  / | |__  | |__) | |  __| |__  |  \| | |     \ \_/ /
-// |  __| | |\/| |  __| |  _  /| | |_ |  __| | . ` | |      \   /
-// | |____| |  | | |____| | \ \| |__| | |____| |\  | |____   | |
-// |______|_|  |_|______|_|  \_\\_____|______|_| \_|\_____|  |_|
-//
+// elevator emergency slots
 
 void ElevatorController::onElevatorFireButton()
 {
@@ -181,13 +162,7 @@ void ElevatorController::onElevatorResetButton()
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " reset button";
 }
 
-//  ____  _    _ _____ _      _____ _____ _   _  _____
-// |  _ \| |  | |_   _| |    |  __ |_   _| \ | |/ ____|
-// | |_) | |  | | | | | |    | |  | || | |  \| | |  __
-// |  _ <| |  | | | | | |    | |  | || | | . ` | | |_ |
-// | |_) | |__| |_| |_| |____| |__| _| |_| |\  | |__| |
-// |____/ \____/|_____|______|_____|_____|_| \_|\_____|
-//
+// Building slots
 
 void ElevatorController::onBuildingFireButton()
 {
@@ -210,10 +185,32 @@ void ElevatorController::onBuildingResetButton()
   qDebug() << "reset emergency states";
 }
 
+// slots from elevator
+
+
+void ElevatorController::onElevatorFLoorChange(int)
+{
+  emit elevatorFloorChanged();
+}
+
 // other
 
 int ElevatorController::getElevatorPosition(int i)
 {
   return elevators[i]->getCurrentFloor();
+}
+
+int ElevatorController::getCurrentElevatorPostition()
+{
+  return elevators[viewSelectedElevatorIndex]->getCurrentFloor();
+}
+
+void ElevatorController::connectElevatorSlots(Elevator * elevator, QThread * thread)
+{
+  connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
+  connect(elevator, &Elevator::shutOff, thread, &QThread::quit, Qt::DirectConnection);
+  connect(thread, &QThread::finished, elevator, &Elevator::deleteLater);
+
+  connect(elevator, &Elevator::floorChanged, this, &ElevatorController::onElevatorFLoorChange);
 }
 

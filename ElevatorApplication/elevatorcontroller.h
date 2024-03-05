@@ -19,12 +19,14 @@ public:
   ElevatorController(ElevatorController*) = delete;
 
   int getElevatorPosition(int);
+  int getCurrentElevatorPostition();
 
 signals:
   void shutOff();
+  void elevatorFloorChanged();
 
 public slots:
-  //SYSTEM CONTROL
+  //SLOTS FROM CONTROLLER
   void onElevatorIndexChange(int);
   void onFloorIndexChange(int);
 
@@ -44,6 +46,9 @@ public slots:
   void onBuildingOutageButton();
   void onHelpButton();
   void onBuildingResetButton();
+
+  //SLOTS FROM ELEVATOR
+  void onElevatorFLoorChange(int);
 
 protected:
   explicit ElevatorController(QObject *parent = nullptr);

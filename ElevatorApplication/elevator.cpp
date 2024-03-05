@@ -6,9 +6,7 @@ Elevator::Elevator(QObject *parent, QMutex *m, int elevatorNumber, bool *queue)
     , floorQueue(queue)
     , number(elevatorNumber)
     , mainMutex(m)
-{
-  elevatorMutex = new QMutex();
-}
+{}
 
 Elevator::~Elevator()
 {
@@ -60,6 +58,13 @@ void Elevator::addFloorToQueue(int floor)
 }
 
 void Elevator::eventLoop() {
+  elevatorMutex = new QMutex();
+
+  if (elevatorMutex == nullptr) {
+    qDebug() << "somethings gone very wrong";
+    systemIsRunning = false;
+  }
+
   while (systemIsRunning)
   {
     moveToNextFloor();

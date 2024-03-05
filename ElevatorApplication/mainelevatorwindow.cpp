@@ -166,6 +166,12 @@ void MainElevatorWindow::on_resetButton_clicked()
   emit buildingResetButton();
 }
 
+void MainElevatorWindow::onElevatorFloorChanged()
+{
+  ui->elevatorFloorDisplay->display(controller->getCurrentElevatorPostition());
+}
+
+
 void MainElevatorWindow::connectControllerSlots()
 {
   connect(this, &MainElevatorWindow::elevatorIndexChange, controller, &ElevatorController::onElevatorIndexChange);
@@ -182,5 +188,7 @@ void MainElevatorWindow::connectControllerSlots()
   connect(this, &MainElevatorWindow::buildingFireButton, controller, &ElevatorController::onBuildingFireButton);
   connect(this, &MainElevatorWindow::buildingOutageButton, controller, &ElevatorController::onBuildingOutageButton);
   connect(this, &MainElevatorWindow::buildingResetButton, controller, &ElevatorController::onBuildingResetButton);
+
+  connect(controller, &ElevatorController::elevatorFloorChanged, this, &MainElevatorWindow::onElevatorFloorChanged);
 }
 

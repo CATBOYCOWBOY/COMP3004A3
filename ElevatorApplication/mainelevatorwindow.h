@@ -71,6 +71,8 @@ private slots:
   void on_handleHelpButton_clicked();
   void on_resetButton_clicked();
 
+  void onElevatorFloorChanged();
+
 private:
   void connectControllerSlots();
   Ui::MainElevatorWindow *ui;

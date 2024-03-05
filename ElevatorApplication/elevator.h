@@ -60,7 +60,7 @@ private:
   QMutex* mainMutex;
 
   // locks resources for elevator thread
-  QMutex* elevatorMutex;
+  QMutex* elevatorMutex = nullptr;
 };
 
 #endif // ELEVATOR_H
