@@ -34,6 +34,7 @@ void MainElevatorWindow::onElevatorIndexChange(int index)
   std::stringstream stream;
   stream << "Elevator " << index + 1 << " Controls";
   ui->ElevatorSelectLabel->setText(QString::fromStdString(stream.str()));
+  ui->elevatorFloorDisplay->display(controller->getCurrentElevatorPostition());
 }
 
 void MainElevatorWindow::onFloorIndexChange(int index)
@@ -177,6 +178,15 @@ void MainElevatorWindow::onElevatorFloorChanged()
 
 void MainElevatorWindow::connectControllerSlots()
 {
+  connect(ui->ElevatorComboBox,
+          &QComboBox::currentIndexChanged,
+          this,
+          &MainElevatorWindow::onElevatorIndexChange);
+  connect(ui->FloorComboBox,
+          &QComboBox::currentIndexChanged,
+          this,
+          &MainElevatorWindow::onFloorIndexChange);
+
   connect(this, &MainElevatorWindow::elevatorIndexChange, controller, &ElevatorController::onElevatorIndexChange);
   connect(this, &MainElevatorWindow::floorIndexChange, controller, &ElevatorController::onFloorIndexChange);
   connect(this, &MainElevatorWindow::elevatorPanelRequest, controller, &ElevatorController::onElevatorPanelRequest);
