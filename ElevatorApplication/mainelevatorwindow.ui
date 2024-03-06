@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Elevator_Controls">
      <attribute name="title">
@@ -315,6 +315,12 @@
          <width>64</width>
          <height>23</height>
         </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="smallDecimalPoint">
+        <bool>false</bool>
        </property>
       </widget>
       <widget class="QLabel" name="label_3">

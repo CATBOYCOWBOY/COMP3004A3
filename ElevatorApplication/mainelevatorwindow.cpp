@@ -1,6 +1,7 @@
 #include "mainelevatorwindow.h"
 #include "ui_mainelevatorwindow.h"
 #include <sstream>
+#include <QtGui>
 
 MainElevatorWindow::MainElevatorWindow(QWidget *parent)
   : QMainWindow(parent)
@@ -13,6 +14,8 @@ MainElevatorWindow::MainElevatorWindow(QWidget *parent)
 
   ui->buildingControlLabel->setText("");
   ui->elevatorFloorDisplay->display(1);
+
+  ui->elevatorFloorDisplay->setSegmentStyle(QLCDNumber::Flat);
 
   controller = ElevatorController::getInstance();
 
