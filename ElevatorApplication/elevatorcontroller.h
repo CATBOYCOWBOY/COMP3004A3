@@ -20,13 +20,30 @@ public:
 
   int getElevatorPosition(int);
   int getCurrentElevatorPostition();
+  QString getCurrentElevatorMessage();
 
 signals:
+  // signals to elevator
   void shutOff();
-  void elevatorFloorChanged();
+
 
   void blockButton(int);
   void elevatorResetButton(int);
+  void elevatorOverButton(int);
+
+  void elevatorOpenButton(bool, int);
+  void elevatorCloseButton(int);
+  void elevatorFireButton(int);
+  void elevatorHelpButton(int);
+
+  void buildingFireButton();
+  void buildingOutageButton();
+  void buildingHelpButton();
+  void buildingResetButton();
+
+  // signals to ui
+  void elevatorFloorChanged();
+  void elevatorMessageChanged();
 
 public slots:
   //SLOTS FROM CONTROLLER
@@ -51,7 +68,8 @@ public slots:
   void onBuildingResetButton();
 
   //SLOTS FROM ELEVATOR
-  void onElevatorFLoorChange(int);
+  void onElevatorFloorChange(int);
+  void onElevatorMessageChange(int);
 
 protected:
   explicit ElevatorController(QObject *parent = nullptr);
@@ -65,8 +83,6 @@ private:
 
   int viewSelectedElevatorIndex;
   int viewSelectedFloorIndex;
-
-  int helpRequestedElevatorIndex;
 
   // shared resource between controller and elevators
   bool** queues;

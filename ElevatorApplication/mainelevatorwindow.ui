@@ -613,7 +613,7 @@
        <item>
         <widget class="QPushButton" name="handleHelpButton">
          <property name="text">
-          <string>Handle Help Request</string>
+          <string>Handle Help Request(s)</string>
          </property>
         </widget>
        </item>

@@ -175,22 +175,31 @@ void MainElevatorWindow::onElevatorFloorChanged()
   ui->elevatorFloorDisplay->display(controller->getCurrentElevatorPostition());
 }
 
+void MainElevatorWindow::onElevatorMessageChanged()
+{
+  ui->ElevatorMessageBox->setText(controller->getCurrentElevatorMessage());
+}
+
+void MainElevatorWindow::on_ElevatorComboBox_currentIndexChanged(int index)
+{
+  onElevatorIndexChange(index);
+}
+
+
+
+void MainElevatorWindow::on_FloorComboBox_currentIndexChanged(int index)
+{
+  onFloorIndexChange(index);
+}
+
 
 void MainElevatorWindow::connectControllerSlots()
 {
-  connect(ui->ElevatorComboBox,
-          &QComboBox::currentIndexChanged,
-          this,
-          &MainElevatorWindow::onElevatorIndexChange);
-  connect(ui->FloorComboBox,
-          &QComboBox::currentIndexChanged,
-          this,
-          &MainElevatorWindow::onFloorIndexChange);
 
   connect(this, &MainElevatorWindow::elevatorIndexChange, controller, &ElevatorController::onElevatorIndexChange);
   connect(this, &MainElevatorWindow::floorIndexChange, controller, &ElevatorController::onFloorIndexChange);
   connect(this, &MainElevatorWindow::elevatorPanelRequest, controller, &ElevatorController::onElevatorPanelRequest);
-  connect(this, &MainElevatorWindow::elevatorOpenRequest, controller, &ElevatorController::onElevatorOpenRequest);
+  connect(this, &MainElevatorWindow::elevatorOpenRequest, controller, &ElevatorController::onElevatorOpenRequest, Qt::DirectConnection);
   connect(this, &MainElevatorWindow::elevatorCloseRequest, controller, &ElevatorController::onElevatorCloseRequest);
   connect(this, &MainElevatorWindow::floorButtonPushed, controller, &ElevatorController::onFloorButtonRequest);
   connect(this, &MainElevatorWindow::elevatorFireButton, controller, &ElevatorController::onElevatorFireButton);
@@ -203,5 +212,7 @@ void MainElevatorWindow::connectControllerSlots()
   connect(this, &MainElevatorWindow::buildingResetButton, controller, &ElevatorController::onBuildingResetButton);
 
   connect(controller, &ElevatorController::elevatorFloorChanged, this, &MainElevatorWindow::onElevatorFloorChanged);
+  connect(controller, &ElevatorController::elevatorMessageChanged, this, &MainElevatorWindow::onElevatorMessageChanged);
 }
+
 

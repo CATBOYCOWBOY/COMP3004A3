@@ -41,6 +41,7 @@ signals:
   void buildingResetButton();
 
 private slots:
+  // UI signnal handler
   void onElevatorIndexChange(int index);
   void onFloorIndexChange(int index);
 
@@ -71,8 +72,13 @@ private slots:
   void on_handleHelpButton_clicked();
   void on_resetButton_clicked();
 
-  void onElevatorFloorChanged();
+  void on_ElevatorComboBox_currentIndexChanged(int index);
 
+  void on_FloorComboBox_currentIndexChanged(int index);
+
+  // Controller signal handler
+  void onElevatorFloorChanged();
+  void onElevatorMessageChanged();
 private:
   void connectControllerSlots();
   Ui::MainElevatorWindow *ui;

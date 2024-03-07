@@ -1,6 +1,7 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
+#include <string>
 #include <QObject>
 #include <QString>
 #include <QThread>
@@ -17,10 +18,11 @@ public:
 
   int getCurrentFloor();
   void onShutOff();
+  std::string getElevatorMessage();
 signals:
   void floorChanged(int);
   void doorOpened(bool);
-  void elevatorMessageChanged(std::string);
+  void elevatorMessageChanged(int);
   void shutOff();
 
 public slots:
@@ -28,13 +30,14 @@ public slots:
 
   void addFloorToQueue(int);
   void handleOpenButton(bool);
-  void handleCloseButton();
+  void handleCloseButton(int);
+
+  void handleElevatorFireButton(int);
+  void handleHelpButton(int);
+  void handleOverloadButton(int);
+  void handleBlockButton(int);
 
   void handleFire();
-  void handleHelpButton();
-  void handleOverload();
-  void handleBlock(int);
-
   void handleOutage();
   void resolveHelp();
   void reset(int);
@@ -42,6 +45,8 @@ public slots:
 
 private:
   bool * floorQueue;
+  bool isOpenButtonPushed = false;
+  bool isCloseButtonPushed = false;
   bool isDoorBlocked = false;
   bool isOverloaded = false;
   bool isThereFire = false;
@@ -49,13 +54,13 @@ private:
   bool powerOutage = false;
   bool systemIsRunning = true;
 
+  std::string message;
   int currentFloor = 1;
-  int number;
+  int number; // index of elevator in EC array
 
   bool moveToNextFloor();
   void onFloorChangeLoop();
-  void onDoorBlockedLoop();
-  void onOverloadedLoop();
+  void onDoorBlockedOrOverloadLoop();
   void onHelpLoop();
   void onFireLoop();
   void onPowerOutLoop();

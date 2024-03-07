@@ -10,6 +10,8 @@
 #define POWER_OUT_MSG "Elevator has lost power"
 #define EMERGENCY_MSG "Returning to safe floor"
 
+#define BLOCKED_MSG "Elevator is blocked"
+#define OVER_MSG "Elevator is overloaded"
 #define HELP_MSG "Elevator has called for help"
 
 #endif // CONSTANTS_H

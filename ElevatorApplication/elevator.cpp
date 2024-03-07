@@ -1,5 +1,6 @@
 #include "elevator.h"
 #include "constants.h"
+#include <sstream>
 
 Elevator::Elevator(QObject *parent, QMutex *m, int elevatorNumber, bool *queue)
     : QObject{parent}
@@ -33,7 +34,6 @@ bool Elevator::moveToNextFloor()
 
   if (next > 0)
   {
-    qInfo() << "Elevator " << number + 1 << " moves to floor " << next + 1;
     currentFloor = next;
     emit floorChanged(next);
     mainMutex->unlock();
@@ -51,25 +51,37 @@ void Elevator::onFloorChangeLoop()
   qInfo() << "Elevator " << number + 1 << " opens door";
   for (int i = 0; i < 20; i++) {
     if (!systemIsRunning) {
-      break;
+      return;
+    }
+    checkDoors();
+    handleEmergency();
+    if (isCloseButtonPushed) {
+      elevatorMutex->lock();
+      isCloseButtonPushed = false;
+      elevatorMutex->unlock();
+      // terminate for loop
+      i = 20;
+    } else if (isOpenButtonPushed){
+        qDebug() << "here";
+      i -= 1;
     }
     QThread::msleep(100);
   }
-  qInfo() << "emergency: " << isThereAnEmergency();
-  while (isThereAnEmergency()) {
+  while (isThereAnEmergency() && systemIsRunning) {
     checkDoors();
+    handleEmergency();
   }
-  qInfo() << "Elevator " << number + 1 << " rings bell";
-  qInfo() << "Elevator " << number + 1 << " close door";
+  if (systemIsRunning) {
+    qInfo() << "Elevator " << number + 1 << " rings bell";
+    qInfo() << "Elevator " << number + 1 << " close door";
+  }
 }
 
 void Elevator::checkDoors()
 {
   qDebug() << "check doors";
-  if (isDoorBlocked) {
-    return onDoorBlockedLoop();
-  } else if (isOverloaded) {
-    return onOverloadedLoop();
+  if (isDoorBlocked || isOverloaded) {
+      onDoorBlockedOrOverloadLoop();
   }
 }
 
@@ -84,37 +96,111 @@ void Elevator::handleEmergency()
   }
 }
 
-void Elevator::onDoorBlockedLoop()
+void Elevator::onDoorBlockedOrOverloadLoop()
 {
-  // 4 seconds and a bit is chosen very arbitrarily
+  std::stringstream s;
+  if (isDoorBlocked){
+    qInfo() << "\nWARNING - elevator " << number + 1 << " door is blocked";
+    s << BLOCKED_MSG << " ";
+  }
+  if (isOverloaded) {
+    qInfo() << "WARNING - elevator " << number + 1 << " door is overloaded\n";
+    s << OVER_MSG;
+  }
+  message = s.str();
+  emit elevatorMessageChanged(number);
+
+  // 4 seconds and a bit is chosen arbitrarily
   for (int i = 0; i < 40; i++) {
-    if (!isDoorBlocked || !systemIsRunning) {
-      return;
+    if ((!isDoorBlocked && !isOverloaded)|| !systemIsRunning) {
+      break;
     }
     QThread::msleep(100);
   }
-  while (isDoorBlocked && systemIsRunning) {
-    qDebug() << "Elevator " << number + 1 << " door is blocked";
+  while ((isDoorBlocked||isOverloaded) && systemIsRunning) {
+    if (isDoorBlocked){
+      qInfo() << "\nWARNING - elevator " << number + 1 << " door is blocked";
+    }
+    if (isOverloaded) {
+      qInfo() << "WARNING - elevator " << number + 1 << " door is overloaded\n";
+    }
     for (int i = 0; i < 40; i++) {
-      if (!isDoorBlocked || !systemIsRunning) {
-        return;
+      if ((!isDoorBlocked && !isOverloaded) || !systemIsRunning) {
+        break;
       }
       QThread::msleep(100);
     }
   }
+  message = "";
+  emit elevatorMessageChanged(number);
 }
 
-void Elevator::onOverloadedLoop() {}
+void Elevator::onHelpLoop()
+{
+  qInfo() << "Elevator " << number + 1 << " calling for help from building";
+  message = HELP_MSG;
+  emit elevatorMessageChanged(number);
+  for (int i = 0; i < 50; i++) {
+    if (!systemIsRunning) {
+        return;
+    }
+    QThread::msleep(100);
+  }
+  qInfo() << "\nCalling emergency services...\n";
+  while (helpButtonPushed && systemIsRunning) {
+    if (!systemIsRunning) {
+      return;
+    }
+    QThread::msleep(100);
+  }
+  qInfo() << "Elevator " << number + 1 << " help call resolved";
+  message = "";
+  emit elevatorMessageChanged(number);
+}
 
-void Elevator::onHelpLoop() {}
+void Elevator::onFireLoop()
+{
+  qInfo() << "Elevator " << number + 1 << " fire alert, moving to ground floor";
+  message = FIRE_MSG;
+  emit elevatorMessageChanged(number);
+  currentFloor = 1;
+  emit floorChanged(1);
+  qInfo() << "Elevator " << number + 1 << " message: please exit elevator";
+  onFloorChangeLoop();
+  while (isThereFire) {
+    if (!systemIsRunning) {
+      return;
+    }
+    QThread::msleep(100);
+  }
+  qInfo() << "Elevator " << number + 1 << " back to normal operation";
+}
 
-void Elevator::onFireLoop() {}
-
-void Elevator::onPowerOutLoop() {}
+void Elevator::onPowerOutLoop() {
+  qInfo() << "Elevator " << number + 1 << " power out alert, moving to ground floor";
+  message = FIRE_MSG;
+  emit elevatorMessageChanged(number);
+  currentFloor = 1;
+  emit floorChanged(1);
+  qInfo() << "Elevator " << number + 1 << " message: please exit elevator";
+  onFloorChangeLoop();
+  while (powerOutage) {
+    if (!systemIsRunning) {
+      return;
+    }
+    QThread::msleep(100);
+  }
+  qInfo() << "Elevator " << number + 1 << " back to normal operation";
+}
 
 bool Elevator::isThereAnEmergency()
 {
   return (isDoorBlocked || isOverloaded || isThereFire || helpButtonPushed || powerOutage);
+}
+
+std::string Elevator::getElevatorMessage()
+{
+  return message;
 }
 
 ////////////////////
@@ -155,37 +241,70 @@ void Elevator::onShutOff()
 }
 
 
-void Elevator::handleOpenButton(bool)
+void Elevator::handleOpenButton(bool status)
 {
-
+  qDebug() << "Elevator " << number + 1 << " open " << status;
+  elevatorMutex->lock();
+  isOpenButtonPushed = status;
+  elevatorMutex->unlock();
 }
 
-void Elevator::handleCloseButton()
+void Elevator::handleCloseButton(int i)
 {
-
+  if (number != i) {
+      return;
+  }
+  qDebug() << "Elevator " << number + 1 << " close ";
+  elevatorMutex->lock();
+  isCloseButtonPushed = true;;
+  elevatorMutex->unlock();
 }
 
 void Elevator::handleFire()
 {
-
+  handleElevatorFireButton(number);
 }
 
-void Elevator::handleHelpButton()
+void Elevator::handleElevatorFireButton(int i)
 {
-
+  if (number != i) {
+      return;
+  }
+  qDebug() << "Elevvator fire button: " << i;
+  elevatorMutex->lock();
+  isThereFire = true;
+  elevatorMutex->unlock();
 }
 
-void Elevator::handleOverload()
+void Elevator::handleHelpButton(int i)
 {
-
+  if (number != i) {
+      return;
+  }
+  qDebug() << "Elevator help buton: " << i;
+  elevatorMutex->lock();
+  helpButtonPushed = true;
+  elevatorMutex->unlock();
 }
 
-void Elevator::handleBlock(int i)
+void Elevator::handleOverloadButton(int i)
 {
-  qDebug() << "Door block signal num: " << i;
   if (number != i) {
     return;
   }
+  qDebug() << "Elevator overload signal num: " << i;
+  elevatorMutex->lock();
+  isOverloaded = true;
+  elevatorMutex->unlock();
+}
+
+void Elevator::handleBlockButton(int i)
+{
+
+  if (number != i) {
+    return;
+  }
+  qDebug() << "Door block signal num: " << i;
   elevatorMutex->lock();
   isDoorBlocked = true;
   elevatorMutex->unlock();
@@ -193,12 +312,18 @@ void Elevator::handleBlock(int i)
 
 void Elevator::handleOutage()
 {
-
+  qDebug() << "Elevator outage";
+  elevatorMutex->lock();
+  powerOutage = true;
+  elevatorMutex->unlock();
 }
 
 void Elevator::resolveHelp()
 {
-
+  qDebug() << "Elevator help resolve";
+  elevatorMutex->lock();
+  powerOutage = true;
+  elevatorMutex->unlock();
 }
 
 void Elevator::reset(int i)

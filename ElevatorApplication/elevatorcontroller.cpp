@@ -10,12 +10,13 @@ ElevatorController::ElevatorController(QObject* parent)
     : QObject{parent}
     , viewSelectedElevatorIndex(0)
     , viewSelectedFloorIndex(0)
-    , helpRequestedElevatorIndex(0)
 {
   elevators = new Elevator *[NUM_ELEVATORS];
   threads = new QThread *[NUM_ELEVATORS];
   queues = new bool*[NUM_ELEVATORS];
   mutex = new QMutex();
+
+  qDebug() << "ctor";
 
   for (int i = 0; i < NUM_ELEVATORS; i++) {
     std::stringstream s;
@@ -88,7 +89,6 @@ void ElevatorController::onElevatorIndexChange(int index)
     exit(1);
   }
   viewSelectedElevatorIndex = index;
-  qDebug() << "Selected Elevator: " << viewSelectedElevatorIndex + 1;
 }
 
 void ElevatorController::onFloorIndexChange(int index)
@@ -97,7 +97,6 @@ void ElevatorController::onFloorIndexChange(int index)
     exit(1);
   }
   viewSelectedFloorIndex = index;
-  qDebug() << "Selected Floor: " << viewSelectedElevatorIndex + 1;
 }
 
 // controls slots
@@ -107,19 +106,22 @@ void ElevatorController::onElevatorPanelRequest(int floor)
   elevators[viewSelectedElevatorIndex]->addFloorToQueue(floor);
 }
 
-void ElevatorController::onElevatorOpenRequest(bool req)
+void ElevatorController::onElevatorOpenRequest(bool status)
 {
-  qDebug() << "Open: " << req;
+  qDebug() << "here";
+  qDebug() << "Open: " << status;
+  qDebug() << "current elvt floor ";/* << elevators[viewSelectedElevatorIndex]->getCurrentFloor();*/
+  elevators[viewSelectedElevatorIndex]->handleOpenButton(status);
 }
 
 void ElevatorController::onElevatorCloseRequest()
 {
   qDebug() << "close";
+  emit elevatorCloseButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onFloorButtonRequest()
 {
-  qDebug() << "floor button pushed, floor " << viewSelectedFloorIndex;
   int closestIndex = 0;
   int closestValue = NUM_FLOORS + 1;
 
@@ -138,17 +140,18 @@ void ElevatorController::onFloorButtonRequest()
 void ElevatorController::onElevatorFireButton()
 {
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " fire button ";
+  emit elevatorFireButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onElevatorHelpButton()
 {
-  helpRequestedElevatorIndex = viewSelectedElevatorIndex;
   qDebug() << "Elevator " << viewSelectedElevatorIndex << " help button";
+  emit elevatorHelpButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onElevatorOverButton()
 {
-  qDebug() << "Elevator " << viewSelectedElevatorIndex << " overload button";
+  emit elevatorOverButton(viewSelectedElevatorIndex);
 }
 
 void ElevatorController::onElevatorBlockButton()
@@ -158,7 +161,6 @@ void ElevatorController::onElevatorBlockButton()
 
 void ElevatorController::onElevatorResetButton()
 {
-  qDebug() << "Elevator " << viewSelectedElevatorIndex << " reset button";
   emit elevatorResetButton(viewSelectedElevatorIndex);
 }
 
@@ -167,30 +169,41 @@ void ElevatorController::onElevatorResetButton()
 void ElevatorController::onBuildingFireButton()
 {
   qDebug() << "Building fire Button";
+  emit buildingFireButton();
 }
 
 void ElevatorController::onBuildingOutageButton()
 {
   qDebug() << "Building outage Button";
+  emit buildingOutageButton();
 }
 
 void ElevatorController::onHelpButton()
 {
-  qDebug() << "handling elevator help request on elevator " << helpRequestedElevatorIndex;
-  helpRequestedElevatorIndex = -1;
+  qDebug() << "handling elevator help requests";
+  emit buildingHelpButton();
 }
 
 void ElevatorController::onBuildingResetButton()
 {
   qDebug() << "reset emergency states";
+  emit buildingResetButton();
 }
 
 // slots from elevator
 
 
-void ElevatorController::onElevatorFLoorChange(int)
+void ElevatorController::onElevatorFloorChange(int i)
 {
-  emit elevatorFloorChanged();
+  if (i == viewSelectedFloorIndex) {
+    emit elevatorFloorChanged();
+  }
+}
+
+void ElevatorController::onElevatorMessageChange(int i) {
+  if (i == viewSelectedFloorIndex) {
+    emit elevatorMessageChanged();
+  }
 }
 
 // other
@@ -205,6 +218,11 @@ int ElevatorController::getCurrentElevatorPostition()
   return elevators[viewSelectedElevatorIndex]->getCurrentFloor();
 }
 
+QString ElevatorController::getCurrentElevatorMessage()
+{
+  return QString::fromStdString(elevators[viewSelectedElevatorIndex]->getElevatorMessage());
+}
+
 void ElevatorController::connectElevatorSlots(Elevator * elevator, QThread * thread)
 {
   connect(thread, &QThread::started, elevator, &Elevator::eventLoop);
@@ -214,14 +232,69 @@ void ElevatorController::connectElevatorSlots(Elevator * elevator, QThread * thr
   connect(this,
           &ElevatorController::blockButton,
           elevator,
-          &Elevator::handleBlock,
+          &Elevator::handleBlockButton,
           Qt::DirectConnection);
   connect(this,
           &ElevatorController::elevatorResetButton,
           elevator,
           &Elevator::reset,
           Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::elevatorOverButton,
+          elevator,
+          &Elevator::handleOverloadButton,
+          Qt::DirectConnection);
 
-  connect(elevator, &Elevator::floorChanged, this, &ElevatorController::onElevatorFLoorChange);
+//  connect(this,
+//          &ElevatorController::elevatorOpenButton,
+//          elevator,
+//          &Elevator::handleOpenButton,
+//          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::elevatorCloseButton,
+          elevator,
+          &Elevator::handleCloseButton);
+  connect(this,
+          &ElevatorController::elevatorFireButton,
+          elevator,
+          &Elevator::handleElevatorFireButton,
+          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::elevatorHelpButton,
+          elevator,
+          &Elevator::handleHelpButton,
+          Qt::DirectConnection);
+
+  connect(this,
+          &ElevatorController::buildingFireButton,
+          elevator,
+          &Elevator::handleFire,
+          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::buildingOutageButton,
+          elevator,
+          &Elevator::handleOutage,
+          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::buildingHelpButton,
+          elevator,
+          &Elevator::resolveHelp,
+          Qt::DirectConnection);
+  connect(this,
+          &ElevatorController::buildingResetButton,
+          elevator,
+          &Elevator::resetEmergency,
+          Qt::DirectConnection);
+
+  connect(elevator,
+          &Elevator::floorChanged,
+          this,
+          &ElevatorController::onElevatorFloorChange,
+          Qt::DirectConnection);
+  connect(elevator,
+          &Elevator::elevatorMessageChanged,
+          this,
+          &ElevatorController::onElevatorMessageChange,
+          Qt::DirectConnection);
 }
 
