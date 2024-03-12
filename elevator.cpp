@@ -194,6 +194,7 @@ void Elevator::onFireLoop()
 
 void Elevator::onPowerOutLoop() {
   qInfo() << "AUDIO WARNING - Elevator " << number + 1 << " power out alert, moving to ground floor";
+  qInfo() << "SWITCHING TO BATTERY BACKUP POWER";
   message = POWER_OUT_MSG;
   emit elevatorMessageChanged(number);
   currentFloor = 1;
